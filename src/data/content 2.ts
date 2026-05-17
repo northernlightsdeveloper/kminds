@@ -11,9 +11,9 @@
 export const navLinks = [
   { label: "Categories", href: "#categories" },
   { label: "Curriculum", href: "#curriculum" },
-  { label: "Parents", href: "#parents" },
-  { label: "About", href: "#about" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Parents",    href: "#parents" },
+  { label: "About",      href: "#about" },
+  { label: "FAQ",        href: "#faq" },
 ];
 
 // ── HERO SECTION ─────────────────────────────────────────────
@@ -26,12 +26,11 @@ export const hero = {
   body: "Discover a vibrant educational journey where imagination meets excellence. We offer personalised curriculums designed to fuel curiosity and build future-ready skills.",
   // CTA = Call To Action (the buttons)
   // When you build a /courses page, change primaryCta.href to "/courses"
-  primaryCta: { label: "Explore Programs", href: "#categories" },
-  secondaryCta: { label: "Our Story", href: "#about" },
-  videoLabel: "Sample Class Recording",
+  primaryCta:   { label: "Explore Programs", href: "#categories" },
+  secondaryCta: { label: "Our Story",        href: "#about" },
+  videoLabel:   "Sample Class Recording",
   // Replace this with your own hosted video thumbnail image
-  heroImageSrc:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuCtaJVdf5WP63FxQ4gCiFbgwEGZN4kCwmz0BhIr7ml90nGgI43LISv4L7VNSmz1KWBDFBmQIwzQE8dop04PEnoSqT-H3XtIoPgPcnu4azTZZY1k-yMUs1t3s94edR_FAiaMhUQsYxrApD9lUohdE7KzbelswlTFgHEaBfL-_99bra4CY-HYYpev8bZicO3pmkUYfD8287Dp2rYb22SJnxhFvEl92voLNGfSAM60WIDik4znOJoUQuu5yD9KGKQIFkcFNNajlj8Y2WA",
+  heroImageSrc: "https://lh3.googleusercontent.com/aida-public/AB6AXuCtaJVdf5WP63FxQ4gCiFbgwEGZN4kCwmz0BhIr7ml90nGgI43LISv4L7VNSmz1KWBDFBmQIwzQE8dop04PEnoSqT-H3XtIoPgPcnu4azTZZY1k-yMUs1t3s94edR_FAiaMhUQsYxrApD9lUohdE7KzbelswlTFgHEaBfL-_99bra4CY-HYYpev8bZicO3pmkUYfD8287Dp2rYb22SJnxhFvEl92voLNGfSAM60WIDik4znOJoUQuu5yD9KGKQIFkcFNNajlj8Y2WA",
 };
 
 // ── TESTIMONIALS ─────────────────────────────────────────────
@@ -68,9 +67,7 @@ export const testimonials = [
 ];
 
 // ── AGE CATEGORIES ───────────────────────────────────────────
-// The three learning path cards.
-// Color styles are defined in AgeCategories.tsx (not here) because
-// Tailwind purges dynamic class strings from data files.
+// The three learning path cards. Each has a color theme.
 // 'icon' is a Material Symbols icon name — browse at:
 // https://fonts.google.com/icons
 export const ageCategories = [
@@ -81,7 +78,15 @@ export const ageCategories = [
     ageRange: "Ages 1 – 5 Years",
     description:
       "Focusing on sensory play, foundational numeracy, and fostering a love for discovery.",
+    // When you build category pages, update this href:
     href: "#",
+    colorTheme: {
+      bg: "bg-secondary-fixed",
+      bgHover: "hover:bg-secondary-container",
+      text: "text-on-secondary-fixed",
+      textMuted: "text-on-secondary-fixed-variant",
+      icon: "text-secondary",
+    },
   },
   {
     id: 2,
@@ -91,6 +96,13 @@ export const ageCategories = [
     description:
       "Building critical thinking skills through logic puzzles, storytelling, and basic science.",
     href: "#",
+    colorTheme: {
+      bg: "bg-primary-fixed",
+      bgHover: "hover:bg-primary-container hover:text-on-primary",
+      text: "text-on-primary-fixed group-hover:text-on-primary",
+      textMuted: "text-on-primary-fixed-variant group-hover:text-primary-fixed",
+      icon: "text-primary",
+    },
   },
   {
     id: 3,
@@ -100,21 +112,23 @@ export const ageCategories = [
     description:
       "Advanced problem-solving, project-based learning, and academic leadership prep.",
     href: "#",
+    colorTheme: {
+      bg: "bg-tertiary-fixed",
+      bgHover: "hover:bg-tertiary-container hover:text-on-tertiary",
+      text: "text-on-tertiary-fixed group-hover:text-on-tertiary",
+      textMuted: "text-on-tertiary-fixed-variant group-hover:text-tertiary-fixed",
+      icon: "text-tertiary",
+    },
   },
 ];
 
 // ── CURRICULUM BOARDS ────────────────────────────────────────
 // Add more curriculum cards here as needed.
 export const curriculums = [
-  { id: 1, code: "AC", name: "Australian Curriculum", icon: "school" },
-  { id: 2, code: "VC", name: "Victorian Curriculum", icon: "history_edu" },
-  {
-    id: 3,
-    code: "IGCSE",
-    name: "UK Cambridge Int.",
-    icon: "workspace_premium",
-  },
-  { id: 4, code: "IB", name: "International Baccalaureate", icon: "public" },
+  { id: 1, code: "AC",    name: "Australian Curriculum", icon: "school" },
+  { id: 2, code: "VC",    name: "Victorian Curriculum",  icon: "history_edu" },
+  { id: 3, code: "IGCSE", name: "UK Cambridge Int.",      icon: "workspace_premium" },
+  { id: 4, code: "IB",    name: "International Baccalaureate", icon: "public" },
 ];
 
 // ── FOR PARENTS & KIDS ───────────────────────────────────────
@@ -149,13 +163,12 @@ export const founder = {
   stats: [
     { value: "15k+", label: "Students" },
     { value: "120+", label: "Educators" },
-    { value: "48", label: "Awards" },
+    { value: "48",   label: "Awards" },
   ],
-  founderName: "Khadija Topiwala",
+  founderName: "Dr. Elena Vance",
   founderTitle: "PhD in Educational Psychology",
   // Replace with your actual founder photo
-  imageSrc:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuCCccehq32S2xTup5U47MSrwuZygTkvE-PdY_GSNLdcEvv4FBb45gNr04e-yMGG_pwzU_MyZCpfh6hyI2ECW9PoqrtmIjNLXMZ3x8ZkhpKDL2G73KF_vIIHmHzmrEfvpQNJ6wwryLnKMuKgQQcepBujy-V6lmv_EtzfPKSIQHUMMbYLHpJMLe9Aa8i3ZHk5ZAmFgXaG3aKxN5oIDU169kfqhYBBKvZN09oBwp_fd9rFb51LHqd_zXktFS-xAofv0fdvouYKW1B8FN8",
+  imageSrc: "https://lh3.googleusercontent.com/aida-public/AB6AXuCCccehq32S2xTup5U47MSrwuZygTkvE-PdY_GSNLdcEvv4FBb45gNr04e-yMGG_pwzU_MyZCpfh6hyI2ECW9PoqrtmIjNLXMZ3x8ZkhpKDL2G73KF_vIIHmHzmrEfvpQNJ6wwryLnKMuKgQQcepBujy-V6lmv_EtzfPKSIQHUMMbYLHpJMLe9Aa8i3ZHk5ZAmFgXaG3aKxN5oIDU169kfqhYBBKvZN09oBwp_fd9rFb51LHqd_zXktFS-xAofv0fdvouYKW1B8FN8",
 };
 
 // ── FAQ ───────────────────────────────────────────────────────
@@ -190,11 +203,11 @@ export const footerLinks = {
   explore: [
     { label: "Categories", href: "#categories" },
     { label: "Curriculum", href: "#curriculum" },
-    { label: "Join Now", href: "#" },
+    { label: "Join Now",    href: "#" },
   ],
   support: [
-    { label: "Help Center", href: "#" },
-    { label: "Privacy Policy", href: "#" },
+    { label: "Help Center",     href: "#" },
+    { label: "Privacy Policy",  href: "#" },
     { label: "Terms of Service", href: "#" },
   ],
 };
