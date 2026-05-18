@@ -14,6 +14,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
 export const metadata: Metadata = {
   title: "Kaleidoscopic Minds | Learn Differently. Think Boldly.",
@@ -38,7 +39,11 @@ export default function RootLayout({
             Material Symbols  → icons (the square boxes you saw)
         ─────────────────────────────────────────────────── */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap"
           rel="stylesheet"
@@ -53,6 +58,8 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
+        {/* Floating WhatsApp button — appears on every page */}
+        <WhatsAppButton />
       </body>
     </html>
   );

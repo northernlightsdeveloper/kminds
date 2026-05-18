@@ -230,7 +230,7 @@ const founder = {
             label: "Awards"
         }
     ],
-    founderName: "Dr. Elena Vance",
+    founderName: "Khadija Topiwala",
     founderTitle: "PhD in Educational Psychology",
     // Replace with your actual founder photo
     imageSrc: "https://lh3.googleusercontent.com/aida-public/AB6AXuCCccehq32S2xTup5U47MSrwuZygTkvE-PdY_GSNLdcEvv4FBb45gNr04e-yMGG_pwzU_MyZCpfh6hyI2ECW9PoqrtmIjNLXMZ3x8ZkhpKDL2G73KF_vIIHmHzmrEfvpQNJ6wwryLnKMuKgQQcepBujy-V6lmv_EtzfPKSIQHUMMbYLHpJMLe9Aa8i3ZHk5ZAmFgXaG3aKxN5oIDU169kfqhYBBKvZN09oBwp_fd9rFb51LHqd_zXktFS-xAofv0fdvouYKW1B8FN8"

@@ -26,11 +26,11 @@ export default function HomePage() {
       {/* 2. Scrollable testimonials strip */}
       <Testimonials />
 
-      {/* 3. Three age group cards (Early Explorers, Mind Builders, Future Leaders) */}
-      <AgeCategories />
-
-      {/* 4. Curriculum boards (AC, VC, IGCSE, IB) */}
+      {/* 3. Curriculum boards (AC, VC, IGCSE, IB) */}
       <Curriculums />
+
+      {/* 4. Three age group cards (Early Explorers, Mind Builders, Future Leaders) */}
+      <AgeCategories />
 
       {/* 5. Split section — benefits for kids and parents */}
       <ForParentsAndKids />
