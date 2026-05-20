@@ -26,7 +26,7 @@ export const hero = {
   body: "Discover a vibrant educational journey where imagination meets excellence. We offer personalised curriculums designed to fuel curiosity and build future-ready skills.",
   // CTA = Call To Action (the buttons)
   // When you build a /courses page, change primaryCta.href to "/courses"
-  primaryCta: { label: "Explore Programs", href: "#categories" },
+  primaryCta: { label: "Explore Programs", href: "/courses" },
   secondaryCta: { label: "Our Story", href: "#about" },
   videoLabel: "Sample Class Recording",
   // Replace this with your own hosted video thumbnail image
@@ -151,7 +151,7 @@ export const founder = {
     { value: "120+", label: "Educators" },
     { value: "48", label: "Awards" },
   ],
-  founderName: "Khadija Topiwala",
+  founderName: "Dr. Elena Vance",
   founderTitle: "PhD in Educational Psychology",
   // Replace with your actual founder photo
   imageSrc:
