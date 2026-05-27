@@ -1,30 +1,31 @@
 // src/components/sections/WhyKminds.tsx
-// To edit: src/data/content.ts (whyKminds array)
-
 import Link from "next/link";
 import { whyKminds } from "@/data/content";
 
-// Static icon background + text colors — full strings for Tailwind
 const cardStyles = [
   {
     iconBg: "bg-primary-fixed",
     icon: "text-primary",
-    border: "border-primary-fixed",
+    num: "text-primary/20",
+    accent: "border-l-primary",
   },
   {
     iconBg: "bg-secondary-fixed",
     icon: "text-secondary",
-    border: "border-secondary-fixed",
+    num: "text-secondary/20",
+    accent: "border-l-secondary",
   },
   {
     iconBg: "bg-tertiary-fixed",
     icon: "text-tertiary",
-    border: "border-tertiary-fixed",
+    num: "text-tertiary/20",
+    accent: "border-l-tertiary",
   },
   {
     iconBg: "bg-primary-fixed",
     icon: "text-primary",
-    border: "border-primary-fixed",
+    num: "text-primary/20",
+    accent: "border-l-primary",
   },
 ];
 
@@ -32,34 +33,52 @@ export default function WhyKminds() {
   return (
     <section
       id="why-kminds"
-      className="bg-surface-container-low py-section-gap border-y border-outline-variant/20"
+      className="py-section-gap relative overflow-hidden"
     >
-      <div className="px-4 md:px-margin-desktop max-w-[1280px] mx-auto">
+      {/* Background accent */}
+      <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+
+      <div className="relative px-4 md:px-margin-desktop max-w-[1280px] mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
-          <span className="text-secondary font-headline text-label-md uppercase tracking-widest mb-4 block">
-            Why Choose Us
-          </span>
-          <h2 className="font-headline text-headline-lg text-on-surface">
-            A Different Kind of Learning
-          </h2>
-          <p className="text-on-surface-variant font-body text-body-md mt-4 max-w-2xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end mb-16">
+          <div>
+            <span className="inline-block bg-secondary-fixed text-secondary font-headline text-label-md px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest">
+              Why KMinds
+            </span>
+            <h2
+              className="font-headline font-extrabold text-on-surface"
+              style={{ fontSize: "clamp(1.8rem,4vw,2.5rem)" }}
+            >
+              A Different Kind
+              <br />
+              of Learning
+            </h2>
+          </div>
+          <p className="font-body text-body-lg text-on-surface-variant leading-relaxed">
             KMinds is not just tuition. It&apos;s a structured academic system
-            built around your child.
+            built entirely around your child — their curriculum, their gaps,
+            their pace.
           </p>
         </div>
 
-        {/* Feature cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        {/* Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-14">
           {whyKminds.map((item, idx) => {
             const s = cardStyles[idx];
             return (
               <div
                 key={item.id}
-                className={`bg-white rounded-3xl p-8 card-shadow border-t-4 ${s.border} hover:-translate-y-2 transition-all duration-300`}
+                className={`group bg-white rounded-3xl p-8 card-shadow border border-outline-variant/20 border-l-4 ${s.accent} hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 relative overflow-hidden`}
               >
+                {/* Big number watermark */}
+                <span
+                  className={`absolute -top-4 -right-2 font-headline font-black text-8xl ${s.num} select-none pointer-events-none leading-none`}
+                >
+                  {idx + 1}
+                </span>
                 <div
-                  className={`w-14 h-14 ${s.iconBg} rounded-2xl flex items-center justify-center mb-6`}
+                  className={`w-14 h-14 ${s.iconBg} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
                 >
                   <span
                     className={`material-symbols-outlined text-3xl ${s.icon}`}
@@ -67,7 +86,7 @@ export default function WhyKminds() {
                     {item.icon}
                   </span>
                 </div>
-                <h3 className="font-headline text-headline-md text-on-surface mb-3">
+                <h3 className="font-headline text-headline-md text-on-surface mb-3 leading-snug">
                   {item.title}
                 </h3>
                 <p className="font-body text-body-md text-on-surface-variant leading-relaxed">
@@ -78,11 +97,19 @@ export default function WhyKminds() {
           })}
         </div>
 
-        {/* CTA */}
-        <div className="text-center">
+        {/* CTA strip */}
+        <div className="bg-primary rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <p className="font-headline text-headline-md text-on-primary">
+              Ready to start?
+            </p>
+            <p className="font-body text-body-md text-on-primary/80 mt-1">
+              Begin with a free academic consultation — no commitment required.
+            </p>
+          </div>
           <Link
             href="/contact"
-            className="inline-block bg-primary text-on-primary px-10 py-4 rounded-full font-headline text-body-md border-b-4 border-[#3435b0] btn-3d"
+            className="shrink-0 bg-secondary-container text-on-secondary-container px-8 py-4 rounded-full font-headline text-label-md border-b-4 border-secondary btn-3d whitespace-nowrap"
           >
             Begin a Personalised Session
           </Link>

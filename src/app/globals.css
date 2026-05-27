@@ -1,65 +1,80 @@
-/* src/app/globals.css
- * ─────────────────────────────────────────────────────────────
- * Global styles for KMinds.
- * Tailwind base/components/utilities are imported here.
- * Custom CSS classes that can't easily be done in Tailwind go here.
- * ─────────────────────────────────────────────────────────────
- */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ── BASE DEFAULTS ───────────────────────────────────────────
- * Sets sane defaults for the whole site.
- */
 @layer base {
   html {
-    scroll-behavior: smooth; /* smooth scroll when clicking anchor links */
+    scroll-behavior: smooth;
   }
-
   body {
     @apply bg-background text-on-background font-body;
-    /* Text selection highlight uses brand color */
-    selection-color: #07006c;
   }
-
   ::selection {
     background-color: #e1e0ff;
     color: #07006c;
   }
 }
 
-/* ── CUSTOM COMPONENT CLASSES ────────────────────────────────
- * These are reusable classes you can apply anywhere.
- * Add new ones here as the project grows.
- */
 @layer components {
-  /* Glass-morphism card: translucent white with blur behind it */
   .glass-card {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
-
-  /* 3D button press effect: button moves down 2px on click */
   .btn-3d {
     transition:
       transform 0.1s ease,
       box-shadow 0.1s ease;
-    box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.18);
   }
   .btn-3d:active {
     transform: translateY(2px);
-    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.18);
   }
-
-  /* Card shadow: primary-tinted soft shadow (not grey) */
   .card-shadow {
-    box-shadow: 0 16px 32px -12px rgba(70, 72, 212, 0.15);
+    box-shadow: 0 16px 40px -12px rgba(70, 72, 212, 0.13);
+  }
+  .card-shadow-amber {
+    box-shadow: 0 16px 40px -12px rgba(133, 83, 0, 0.13);
   }
 
-  /* Material Symbols icon defaults */
+  /* Geometric background pattern */
+  .geo-bg {
+    background-image:
+      radial-gradient(
+        circle at 20% 20%,
+        rgba(70, 72, 212, 0.06) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 80% 80%,
+        rgba(254, 166, 25, 0.06) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 60% 10%,
+        rgba(0, 136, 93, 0.04) 0%,
+        transparent 40%
+      );
+  }
+
+  /* Dot grid texture */
+  .dot-grid {
+    background-image: radial-gradient(
+      circle,
+      rgba(70, 72, 212, 0.08) 1px,
+      transparent 1px
+    );
+    background-size: 28px 28px;
+  }
+
+  /* Section divider diagonal */
+  .diagonal-top {
+    clip-path: polygon(0 4%, 100% 0%, 100% 100%, 0% 100%);
+    margin-top: -2rem;
+    padding-top: 4rem;
+  }
+
   .material-symbols-outlined {
     font-variation-settings:
       "FILL" 0,
@@ -77,10 +92,8 @@
     direction: ltr;
     -webkit-font-smoothing: antialiased;
   }
-
-  /* Horizontal scrollbar for testimonials row */
   .custom-scrollbar::-webkit-scrollbar {
-    height: 6px;
+    height: 4px;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb {
     background: #c7c4d7;
@@ -88,5 +101,60 @@
   }
   .custom-scrollbar::-webkit-scrollbar-track {
     background: transparent;
+  }
+
+  /* Animate on scroll — add class via JS or just use CSS animation-delay */
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(32px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  .animate-fade-up {
+    animation: fadeUp 0.7s ease-out forwards;
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  .animate-scale-in {
+    animation: scaleIn 0.6s ease-out forwards;
+  }
+  .delay-100 {
+    animation-delay: 0.1s;
+    opacity: 0;
+  }
+  .delay-200 {
+    animation-delay: 0.2s;
+    opacity: 0;
+  }
+  .delay-300 {
+    animation-delay: 0.3s;
+    opacity: 0;
+  }
+  .delay-400 {
+    animation-delay: 0.4s;
+    opacity: 0;
   }
 }
