@@ -1,65 +1,83 @@
 // src/data/content.ts
 // ─────────────────────────────────────────────────────────────
-// CONTENT DATA FILE — The single source of truth for all text.
-//
-// ✅ To change any text on the site, edit it HERE.
-// ✅ You don't need to touch the component files for text changes.
-// ✅ To add more testimonials, FAQ items, etc. — just add to the arrays.
+// CONTENT DATA FILE — Single source of truth for all site text.
+// ✅ To change any text, edit it HERE only.
 // ─────────────────────────────────────────────────────────────
 
 // ── NAVIGATION ───────────────────────────────────────────────
 export const navLinks = [
-  { label: "Categories", href: "#categories" },
-  { label: "Curriculum", href: "#curriculum" },
-  { label: "Parents", href: "#parents" },
-  { label: "About", href: "#about" },
-  { label: "FAQ", href: "#faq" },
+  {
+    label: "Why KMinds",
+    href: "#why-kminds",
+    dropdown: [
+      { label: "Customised Learning", href: "#why-kminds" },
+      { label: "Reviews", href: "#testimonials" },
+    ],
+  },
+  {
+    label: "Curriculums",
+    href: "#curriculum",
+    dropdown: [
+      { label: "Australian Curriculum (AC)", href: "#curriculum" },
+      { label: "Victorian Curriculum (VC)", href: "#curriculum" },
+      { label: "IGCSE", href: "#curriculum" },
+      { label: "IB", href: "#curriculum" },
+    ],
+  },
+  {
+    label: "Programs",
+    href: "#categories",
+    dropdown: [
+      { label: "Years 5–7", href: "#categories" },
+      { label: "Years 8–10", href: "#categories" },
+      { label: "Years 11–12", href: "#categories" },
+    ],
+  },
+  { label: "FAQs", href: "#faq", dropdown: [] },
+  { label: "About Us", href: "#about", dropdown: [] },
 ];
 
-// ── HERO SECTION ─────────────────────────────────────────────
+// ── HERO ─────────────────────────────────────────────────────
 export const hero = {
-  eyebrow: "Unlocking Every Child's Potential",
-  // The word in <em> tags will render in italic + primary color
-  headline: "Igniting Young Minds through a",
-  headlineAccent: "Kaleidoscope",
-  headlineSuffix: "of Learning",
-  body: "Discover a vibrant educational journey where imagination meets excellence. We offer personalised curriculums designed to fuel curiosity and build future-ready skills.",
-  // CTA = Call To Action (the buttons)
-  // When you build a /courses page, change primaryCta.href to "/courses"
-  primaryCta: { label: "Explore Programs", href: "/courses" },
-  secondaryCta: { label: "Our Story", href: "#about" },
-  videoLabel: "Sample Class Recording",
-  // Replace this with your own hosted video thumbnail image
+  brandName: "Kaleidoscopic Minds",
+  tagline: "Where Potential Becomes Performance",
+  subTagline: "Clarity. Confidence. Academic Excellence.",
+  body: "A structured learning experience designed for students who aim higher.",
+  primaryCta: { label: "Begin a Personalised Session", href: "/contact" },
+  secondaryCta: { label: "Explore Programs", href: "/courses" },
   heroImageSrc:
     "https://lh3.googleusercontent.com/aida-public/AB6AXuCtaJVdf5WP63FxQ4gCiFbgwEGZN4kCwmz0BhIr7ml90nGgI43LISv4L7VNSmz1KWBDFBmQIwzQE8dop04PEnoSqT-H3XtIoPgPcnu4azTZZY1k-yMUs1t3s94edR_FAiaMhUQsYxrApD9lUohdE7KzbelswlTFgHEaBfL-_99bra4CY-HYYpev8bZicO3pmkUYfD8287Dp2rYb22SJnxhFvEl92voLNGfSAM60WIDik4znOJoUQuu5yD9KGKQIFkcFNNajlj8Y2WA",
+  videoLabel: "Sample Class Recording",
 };
 
 // ── TESTIMONIALS ─────────────────────────────────────────────
-// Add more objects to this array to add more testimonial cards.
-// 'variant' controls the card color: "light" = white, "dark" = primary purple
+export const testimonialsSection = {
+  headline: "Trusted by Parents. Valued by Students.",
+};
+
 export const testimonials = [
   {
     id: 1,
     quote:
       "The curriculum at Kaleidoscopic Minds is exactly what my daughter needed. She's finally excited about math and looks forward to every session!",
     name: "Sarah J.",
-    role: "Parent of Year 4 Student",
+    role: "Parent of Year 7 Student",
     avatarColor: "bg-secondary-fixed",
     variant: "light" as const,
   },
   {
     id: 2,
     quote:
-      "I love how interactive the lessons are. It doesn't feel like school, it feels like an adventure. I've learned more here than anywhere else.",
+      "I love how interactive the lessons are. It doesn't feel like school — it feels like an adventure. I've learned more here than anywhere else.",
     name: "Leo M.",
-    role: "Grade 7 Student",
+    role: "Year 9 Student",
     avatarColor: "bg-primary-fixed-dim",
     variant: "dark" as const,
   },
   {
     id: 3,
     quote:
-      "The transition to IGCSE was daunting, but the support here made it seamless. The tutors are truly world-class and very patient.",
+      "The transition to IGCSE was daunting, but the support here made it seamless. The mentors are truly world-class and very patient.",
     name: "David R.",
     role: "Parent of Year 10 Student",
     avatarColor: "bg-tertiary-fixed",
@@ -67,120 +85,308 @@ export const testimonials = [
   },
 ];
 
-// ── AGE CATEGORIES ───────────────────────────────────────────
-// The three learning path cards.
-// Color styles are defined in AgeCategories.tsx (not here) because
-// Tailwind purges dynamic class strings from data files.
-// 'icon' is a Material Symbols icon name — browse at:
-// https://fonts.google.com/icons
-export const ageCategories = [
+// ── CURRICULUMS ───────────────────────────────────────────────
+export const curriculums = [
   {
     id: 1,
-    icon: "child_care",
-    title: "Early Explorers",
-    ageRange: "Ages 1 – 5 Years",
+    code: "AC",
+    icon: "school",
+    name: "Australian Curriculum",
+    yearRange: "Years 5–12",
     description:
-      "Focusing on sensory play, foundational numeracy, and fostering a love for discovery.",
-    href: "#",
+      "A structured academic pathway aligned with national standards, designed to build strong fundamentals and consistent performance across all year levels.",
+    points: [
+      "Concept-focused learning approach",
+      "Aligned with school assessments",
+      "Progressive skill development",
+      "Regular performance tracking",
+    ],
+    footer: "Designed for clarity, consistency, and long-term academic growth.",
   },
   {
     id: 2,
-    icon: "architecture",
-    title: "Mind Builders",
-    ageRange: "Ages 6 – 8 Years",
+    code: "VC",
+    icon: "history_edu",
+    name: "Victorian Curriculum",
+    yearRange: "Years 5–12",
     description:
-      "Building critical thinking skills through logic puzzles, storytelling, and basic science.",
-    href: "#",
+      "Tailored to meet the Victorian framework, this pathway ensures students stay aligned with school expectations while strengthening core academic skills.",
+    points: [
+      "Curriculum-mapped lesson structure",
+      "Assessment-oriented preparation",
+      "Focus on analytical thinking",
+      "Continuous progress monitoring",
+    ],
+    footer: "Built to support both academic understanding and exam readiness.",
   },
-  {
-    id: 3,
-    icon: "rocket_launch",
-    title: "Future Leaders",
-    ageRange: "Ages 9 – 12 Years",
-    description:
-      "Advanced problem-solving, project-based learning, and academic leadership prep.",
-    href: "#",
-  },
-];
-
-// ── CURRICULUM BOARDS ────────────────────────────────────────
-// Add more curriculum cards here as needed.
-export const curriculums = [
-  { id: 1, code: "AC", name: "Australian Curriculum", icon: "school" },
-  { id: 2, code: "VC", name: "Victorian Curriculum", icon: "history_edu" },
   {
     id: 3,
     code: "IGCSE",
-    name: "UK Cambridge Int.",
     icon: "workspace_premium",
+    name: "IGCSE",
+    yearRange: "Years 5–10",
+    description:
+      "An internationally recognised curriculum that emphasises deep conceptual understanding and structured exam preparation.",
+    points: [
+      "Strong focus on core concepts",
+      "Global academic standards",
+      "Exam-focused learning strategy",
+      "Application-based problem solving",
+    ],
+    footer:
+      "Ideal for students aiming for clarity and strong academic outcomes.",
   },
-  { id: 4, code: "IB", name: "International Baccalaureate", icon: "public" },
+  {
+    id: 4,
+    code: "IB",
+    icon: "public",
+    name: "International Baccalaureate",
+    yearRange: "Years 5–10",
+    description:
+      "A holistic, inquiry-based learning pathway that develops critical thinking and independent learning skills.",
+    points: [
+      "Inquiry-led learning approach",
+      "Real-world concept application",
+      "Emphasis on analytical thinking",
+      "Structured academic progression",
+    ],
+    footer: "Designed to build confident, independent learners.",
+  },
 ];
 
-// ── FOR PARENTS & KIDS ───────────────────────────────────────
-export const perspectives = [
+// ── AGE CATEGORIES ───────────────────────────────────────────
+export const ageCategories = [
   {
     id: 1,
-    icon: "celebration",
-    iconBg: "bg-secondary-container/20",
-    iconColor: "text-secondary",
-    title: "Pure Joy for Kids",
-    body: "Gamified challenges, interactive storytelling, and creative rewards that keep engagement high and boredom at bay.",
+    icon: "foundation",
+    title: "Early Foundations",
+    ageRange: "Years 5–7",
+    tagline: "Where strong learners are built",
+    description:
+      "Building the essential academic foundations with concept clarity, logical thinking, and guided progress tracking that sets students up for long-term success.",
+    points: [
+      "Concept clarity & logical thinking",
+      "Strong academic foundations",
+      "Guided progress tracking",
+    ],
+    href: "/courses",
   },
   {
     id: 2,
-    icon: "monitoring",
-    iconBg: "bg-primary-container/20",
-    iconColor: "text-primary",
-    title: "Peace of Mind for Parents",
-    body: "Real-time progress tracking, weekly performance insights, and direct communication channels with expert educators.",
+    icon: "trending_up",
+    title: "Academic Advancement",
+    ageRange: "Years 8–10",
+    tagline: "Where performance begins to matter",
+    description:
+      "Strengthening fundamentals and shifting focus toward exam-ready performance, with regular assessments and structured feedback to drive real improvement.",
+    points: [
+      "Strengthened fundamentals",
+      "Exam-focused preparation",
+      "Regular assessments & feedback",
+    ],
+    href: "/courses",
+  },
+  {
+    id: 3,
+    icon: "emoji_events",
+    title: "Senior Excellence",
+    ageRange: "Years 11–12",
+    tagline: "Where outcomes define direction",
+    description:
+      "Intensive, outcome-driven preparation for senior students — advanced concept mastery, revision strategies, and detailed performance tracking for decisive results.",
+    points: [
+      "Advanced concept mastery",
+      "Intensive practice & revision",
+      "Detailed performance tracking",
+    ],
+    href: "/courses",
   },
 ];
 
-// ── FOUNDER SECTION ───────────────────────────────────────────
+// ── WHY KMINDS ───────────────────────────────────────────────
+export const whyKminds = [
+  {
+    id: 1,
+    icon: "person_pin",
+    title: "Personalised to Each Student",
+    body: "No two students are the same. Every learning plan is built around the individual — their curriculum, year level, strengths, and gaps.",
+  },
+  {
+    id: 2,
+    icon: "track_changes",
+    title: "Structured & Outcome-Driven",
+    body: "Our sessions are focused, methodical, and designed for measurable academic improvement — not just completion of content.",
+  },
+  {
+    id: 3,
+    icon: "verified",
+    title: "Qualified Mentors",
+    body: "All mentors are carefully selected, trained, and aligned with the specific curriculum requirements of each student.",
+  },
+  {
+    id: 4,
+    icon: "insights",
+    title: "Progress You Can See",
+    body: "Regular assessments, performance reports, and continuous feedback keep both students and parents informed at every stage.",
+  },
+];
+
+// ── FOUNDER ──────────────────────────────────────────────────
 export const founder = {
-  eyebrow: "The Visionary Behind KM",
-  headline: "Nurturing curiosity is my lifelong mission.",
+  eyebrow: "About Kaleidoscopic Minds",
+  headline: "Every mind is unique. We build the system around it.",
   paragraphs: [
-    "Founded on the belief that education should be as vibrant as a kaleidoscope, Kaleidoscopic Minds began as a small initiative to bridge the gap between rigid curriculums and the boundless imagination of children.",
-    "With over 20 years of experience in educational psychology and curriculum design, I've seen firsthand how a child's potential can be unlocked when they are met with empathy, creativity, and the right intellectual challenge.",
-    "Our goal is not just to teach subjects, but to build a foundation of lifelong curiosity and resilience. We don't just prepare kids for exams; we prepare them for the world.",
+    "I began teaching over a decade ago, working across multiple learning systems and platforms. Over time, one thing became clear — most models focus on delivering more classes, not better learning. Students are often placed into fixed structures, regardless of what they truly need.",
+    "KMinds was created to change that. The name Kaleidoscopic Minds comes from a simple belief: every child thinks differently. Each mind is a unique blend of ideas, perspectives, and potential — much like a kaleidoscope. When guided in the right way, that complexity becomes clarity.",
+    "At KMinds, we don't fit students into a system — we build the system around them.",
   ],
+  vision:
+    "To redefine academic learning through clarity, confidence, and long-term success.",
+  mission:
+    "To deliver structured, personalised learning that adapts to each student and drives measurable academic outcomes.",
+  goal: "To build a globally trusted platform that supports diverse learning styles across leading curricula — while staying consistent in quality, structure, and results.",
   stats: [
-    { value: "15k+", label: "Students" },
-    { value: "120+", label: "Educators" },
-    { value: "48", label: "Awards" },
+    { value: "10+", label: "Years Experience" },
+    { value: "4", label: "Curriculums" },
+    { value: "1:1", label: "Sessions" },
   ],
-  founderName: "Dr. Elena Vance",
-  founderTitle: "PhD in Educational Psychology",
-  // Replace with your actual founder photo
+  founderName: "Founder, Kaleidoscopic Minds",
+  founderTitle: "Educator & Academic Mentor",
   imageSrc:
     "https://lh3.googleusercontent.com/aida-public/AB6AXuCCccehq32S2xTup5U47MSrwuZygTkvE-PdY_GSNLdcEvv4FBb45gNr04e-yMGG_pwzU_MyZCpfh6hyI2ECW9PoqrtmIjNLXMZ3x8ZkhpKDL2G73KF_vIIHmHzmrEfvpQNJ6wwryLnKMuKgQQcepBujy-V6lmv_EtzfPKSIQHUMMbYLHpJMLe9Aa8i3ZHk5ZAmFgXaG3aKxN5oIDU169kfqhYBBKvZN09oBwp_fd9rFb51LHqd_zXktFS-xAofv0fdvouYKW1B8FN8",
 };
 
-// ── FAQ ───────────────────────────────────────────────────────
-// Add more objects here to add more FAQ items.
-// The first item (defaultOpen: true) is expanded on page load.
+// ── FAQ ──────────────────────────────────────────────────────
 export const faqItems = [
   {
     id: 1,
-    question: "How do I choose the right curriculum for my child?",
+    question: "How is KMinds different from regular tuition?",
     answer:
-      "Our educational advisors offer a free 30-minute consultation to assess your child's needs, academic history, and future goals to recommend the most suitable path.",
+      "KMinds offers a structured, personalised academic system rather than generic group tuition, focusing on measurable outcomes.",
     defaultOpen: true,
   },
   {
     id: 2,
-    question: "Are the classes live or pre-recorded?",
+    question: "Do you follow the school curriculum?",
     answer:
-      "We offer a hybrid model. Most of our core modules include live interactive sessions with tutors, complemented by high-quality pre-recorded deep dives and practice modules.",
+      "Yes, all sessions are aligned with the student's curriculum — Australian, Victorian, IGCSE, or IB.",
     defaultOpen: false,
   },
   {
     id: 3,
-    question: "Can I switch programs if my child isn't happy?",
+    question: "What grades do you cover?",
+    answer: "We work with students from Years 5 to 12 across most curricula.",
+    defaultOpen: false,
+  },
+  {
+    id: 4,
+    question: "How are sessions conducted?",
     answer:
-      "Yes! We prioritise the child's comfort. You can switch between age categories or curriculum tracks within the first two weeks of any term.",
+      "Sessions are conducted live, online, with focused mentor interaction and structured lesson plans.",
+    defaultOpen: false,
+  },
+  {
+    id: 5,
+    question: "Are sessions one-on-one or group-based?",
+    answer: "We offer one-to-one sessions.",
+    defaultOpen: false,
+  },
+  {
+    id: 6,
+    question: "How do you track progress?",
+    answer:
+      "Through regular assessments, performance reports, and continuous mentor feedback.",
+    defaultOpen: false,
+  },
+  {
+    id: 7,
+    question: "Can parents monitor progress?",
+    answer: "Yes, parents receive clear updates and performance insights.",
+    defaultOpen: false,
+  },
+  {
+    id: 8,
+    question: "How often are sessions held?",
+    answer: "Frequency depends on the student's personalised learning plan.",
+    defaultOpen: false,
+  },
+  {
+    id: 9,
+    question: "Do you provide homework or practice?",
+    answer: "Yes, structured practice is part of the learning system.",
+    defaultOpen: false,
+  },
+  {
+    id: 10,
+    question: "What subjects do you cover?",
+    answer:
+      "Primarily Mathematics and Science, with expansion based on demand.",
+    defaultOpen: false,
+  },
+  {
+    id: 11,
+    question: "How do you ensure concept clarity?",
+    answer:
+      "By focusing on understanding before practice, supported by mentor guidance.",
+    defaultOpen: false,
+  },
+  {
+    id: 12,
+    question: "Is there an initial assessment?",
+    answer:
+      "Yes, we begin with an academic evaluation to understand the student's requirements.",
+    defaultOpen: false,
+  },
+  {
+    id: 13,
+    question: "What is the teaching approach?",
+    answer: "Concept-first, structured, and outcome-driven.",
+    defaultOpen: false,
+  },
+  {
+    id: 14,
+    question: "Are mentors qualified?",
+    answer:
+      "All mentors are carefully selected and trained to deliver structured learning.",
+    defaultOpen: false,
+  },
+  {
+    id: 15,
+    question: "What if a student misses a session?",
+    answer: "Make-up sessions or adjustments are provided where applicable.",
+    defaultOpen: false,
+  },
+  {
+    id: 16,
+    question: "How soon can we see results?",
+    answer:
+      "Most parents notice improvement within a few months of consistent sessions.",
+    defaultOpen: false,
+  },
+  {
+    id: 17,
+    question: "Is KMinds suitable for high-performing students?",
+    answer:
+      "Yes, we help both struggling and advanced students reach their potential.",
+    defaultOpen: false,
+  },
+  {
+    id: 18,
+    question: "How do we get started?",
+    answer:
+      "You can begin with a personalised academic consultation — free of cost.",
+    defaultOpen: false,
+  },
+  {
+    id: 19,
+    question: "Is there a long-term commitment?",
+    answer: "Plans are flexible and based on student needs.",
+    defaultOpen: false,
+  },
+  {
+    id: 20,
+    question: "Do you prepare for exams?",
+    answer: "Yes, we include structured exam preparation within every program.",
     defaultOpen: false,
   },
 ];
@@ -188,18 +394,20 @@ export const faqItems = [
 // ── FOOTER ───────────────────────────────────────────────────
 export const footerLinks = {
   explore: [
-    { label: "Categories", href: "#categories" },
-    { label: "Curriculum", href: "#curriculum" },
-    { label: "Join Now", href: "#" },
+    { label: "Why KMinds", href: "#why-kminds" },
+    { label: "Programs", href: "/courses" },
+    { label: "Curriculums", href: "#curriculum" },
+    { label: "FAQs", href: "#faq" },
   ],
   support: [
-    { label: "Help Center", href: "#" },
+    { label: "Contact Us", href: "/contact" },
     { label: "Privacy Policy", href: "#" },
     { label: "Terms of Service", href: "#" },
   ],
 };
 
 export const contactInfo = {
-  email: "hello@kminds.com.au",
-  phone: "+61 (0) EDU-KATE",
+  email: "hello@kaleidoscopicminds.com.au",
+  phone: "+91 6268 300 535",
+  whatsapp: "916268300535",
 };

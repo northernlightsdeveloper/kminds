@@ -1,59 +1,91 @@
 // src/components/layout/Navbar.tsx
 // ─────────────────────────────────────────────────────────────
-// NAVBAR — Sticky navigation bar at the top of every page.
-//
-// To add a new nav link:
-//   1. Open src/data/content.ts
-//   2. Add to the navLinks array: { label: "Courses", href: "/courses" }
-//
-// To make "Join Now" open a modal or go to a page:
-//   Change the href on the button below, or add an onClick handler.
+// NAVBAR — Sticky top nav with dropdown menus + Sign In button.
+// To edit links: src/data/content.ts (navLinks array)
 // ─────────────────────────────────────────────────────────────
 
-"use client"; // 'use client' is needed because we use React state (mobile menu toggle)
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
 import { navLinks } from "@/data/content";
 
 export default function Navbar() {
-  // State to track whether the mobile menu is open or closed
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   return (
-    <header className="sticky top-0 w-full z-50 bg-surface/80 backdrop-blur-md shadow-sm">
+    <header className="sticky top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-sm border-b border-outline-variant/20">
       <nav className="flex justify-between items-center px-4 md:px-margin-desktop py-4 max-w-[1280px] mx-auto">
-
-        {/* ── LOGO ──────────────────────────────────────────── */}
-        {/* To add an image logo: replace the text with <Image src="/logo.png" ... /> */}
-        <Link href="/" className="font-headline text-headline-md font-extrabold text-primary">
-          Kaleidoscopic Minds
+        {/* ── LOGO ────────────────────────────────────────── */}
+        <Link href="/" className="flex items-center gap-2">
+          <span className="font-headline text-headline-md font-extrabold text-primary leading-none">
+            Kaleidoscopic
+            <br />
+            <span className="text-secondary">Minds</span>
+          </span>
         </Link>
 
-        {/* ── DESKTOP NAV LINKS ─────────────────────────────── */}
-        {/* Hidden on mobile (hidden), shown on medium+ screens (md:flex) */}
+        {/* ── DESKTOP NAV ─────────────────────────────────── */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <Link
+            <div
               key={link.label}
-              href={link.href}
-              className="font-headline text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200"
+              className="relative"
+              onMouseEnter={() =>
+                link.dropdown.length > 0 && setOpenDropdown(link.label)
+              }
+              onMouseLeave={() => setOpenDropdown(null)}
             >
-              {link.label}
-            </Link>
+              <Link
+                href={link.href}
+                className="font-headline text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200 flex items-center gap-1"
+              >
+                {link.label}
+                {link.dropdown.length > 0 && (
+                  <span className="material-symbols-outlined text-base">
+                    expand_more
+                  </span>
+                )}
+              </Link>
+
+              {/* Dropdown */}
+              {link.dropdown.length > 0 && openDropdown === link.label && (
+                <div className="absolute top-full left-0 mt-2 bg-white rounded-2xl shadow-xl border border-outline-variant/20 py-2 min-w-[220px] z-50">
+                  {link.dropdown.map((item) => (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      className="block px-5 py-3 font-headline text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
         </div>
 
-        {/* ── JOIN NOW BUTTON ───────────────────────────────── */}
-        {/* When you build a signup page, change href to "/signup" */}
-        <Link
-          href="#"
-          className="hidden md:block bg-primary text-on-primary px-6 py-2.5 rounded-full font-headline text-label-md border-b-4 border-primary-container btn-3d"
-        >
-          Join Now
-        </Link>
+        {/* ── RIGHT BUTTONS ───────────────────────────────── */}
+        <div className="hidden md:flex items-center gap-3">
+          {/* Sign In — ghost button */}
+          <Link
+            href="#"
+            className="font-headline text-label-md text-on-surface-variant hover:text-primary transition-colors px-4 py-2"
+          >
+            Sign In
+          </Link>
+          {/* Begin Session — primary CTA */}
+          <Link
+            href="/contact"
+            className="bg-primary text-on-primary px-5 py-2.5 rounded-full font-headline text-label-md border-b-4 border-[#3435b0] btn-3d text-sm"
+          >
+            Begin a Session
+          </Link>
+        </div>
 
-        {/* ── MOBILE HAMBURGER ─────────────────────────────── */}
+        {/* ── MOBILE HAMBURGER ────────────────────────────── */}
         <button
           className="md:hidden text-on-surface"
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -65,27 +97,50 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* ── MOBILE DROPDOWN MENU ──────────────────────────── */}
-      {/* Shown only when mobileOpen is true */}
+      {/* ── MOBILE MENU ─────────────────────────────────── */}
       {mobileOpen && (
-        <div className="md:hidden bg-surface border-t border-outline-variant/30 px-6 py-4 flex flex-col gap-4">
+        <div className="md:hidden bg-surface border-t border-outline-variant/20 px-6 py-4 flex flex-col gap-2">
           {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              onClick={() => setMobileOpen(false)} // close menu on tap
-              className="font-headline text-label-md text-on-surface-variant hover:text-primary transition-colors"
-            >
-              {link.label}
-            </Link>
+            <div key={link.label}>
+              <Link
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className="block font-headline text-label-md text-on-surface-variant hover:text-primary py-2 transition-colors"
+              >
+                {link.label}
+              </Link>
+              {link.dropdown.length > 0 && (
+                <div className="pl-4 border-l border-outline-variant/30 mb-2">
+                  {link.dropdown.map((item) => (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="block font-headline text-label-md text-on-surface-variant/70 hover:text-primary py-1.5 transition-colors text-xs"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
-          <Link
-            href="#"
-            onClick={() => setMobileOpen(false)}
-            className="bg-primary text-on-primary text-center px-6 py-3 rounded-full font-headline text-label-md"
-          >
-            Join Now
-          </Link>
+          <div className="pt-2 flex flex-col gap-2 border-t border-outline-variant/20 mt-2">
+            <Link
+              href="#"
+              onClick={() => setMobileOpen(false)}
+              className="text-center font-headline text-label-md text-on-surface-variant py-2"
+            >
+              Sign In
+            </Link>
+            <Link
+              href="/contact"
+              onClick={() => setMobileOpen(false)}
+              className="bg-primary text-on-primary text-center px-6 py-3 rounded-full font-headline text-label-md"
+            >
+              Begin a Session
+            </Link>
+          </div>
         </div>
       )}
     </header>
