@@ -1,6 +1,7 @@
 // src/components/layout/Navbar.tsx
 // ─────────────────────────────────────────────────────────────
 // NAVBAR — Sticky top nav with dropdown menus + Sign In button.
+// Dropdowns use a padding bridge to prevent disappearing on hover.
 // To edit links: src/data/content.ts (navLinks array)
 // ─────────────────────────────────────────────────────────────
 
@@ -19,7 +20,7 @@ export default function Navbar() {
       <nav className="flex justify-between items-center px-4 md:px-margin-desktop py-4 max-w-[1280px] mx-auto">
         {/* ── LOGO ────────────────────────────────────────── */}
         <Link href="/" className="flex items-center gap-2">
-          <span className="font-headline text-headline-md font-extrabold text-primary leading-none">
+          <span className="font-headline font-extrabold text-primary leading-tight text-lg">
             Kaleidoscopic
             <br />
             <span className="text-secondary">Minds</span>
@@ -39,28 +40,36 @@ export default function Navbar() {
             >
               <Link
                 href={link.href}
-                className="font-headline text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200 flex items-center gap-1"
+                className="font-headline text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200 flex items-center gap-1 py-2"
               >
                 {link.label}
                 {link.dropdown.length > 0 && (
-                  <span className="material-symbols-outlined text-base">
+                  <span
+                    className={`material-symbols-outlined text-base transition-transform duration-200 ${openDropdown === link.label ? "rotate-180" : ""}`}
+                  >
                     expand_more
                   </span>
                 )}
               </Link>
 
-              {/* Dropdown */}
+              {/* ── DROPDOWN ──────────────────────────────────
+                  pt-2 creates a transparent padding bridge between
+                  the nav link and the dropdown panel — this prevents
+                  the dropdown from disappearing when mouse moves down.
+              ─────────────────────────────────────────────── */}
               {link.dropdown.length > 0 && openDropdown === link.label && (
-                <div className="absolute top-full left-0 mt-2 bg-white rounded-2xl shadow-xl border border-outline-variant/20 py-2 min-w-[220px] z-50">
-                  {link.dropdown.map((item) => (
-                    <Link
-                      key={item.label}
-                      href={item.href}
-                      className="block px-5 py-3 font-headline text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
+                <div className="absolute top-full left-0 pt-2 z-50 min-w-[220px]">
+                  <div className="bg-white rounded-2xl shadow-xl border border-outline-variant/20 py-2">
+                    {link.dropdown.map((item) => (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        className="block px-5 py-3 font-headline text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
@@ -69,14 +78,12 @@ export default function Navbar() {
 
         {/* ── RIGHT BUTTONS ───────────────────────────────── */}
         <div className="hidden md:flex items-center gap-3">
-          {/* Sign In — ghost button */}
           <Link
             href="#"
             className="font-headline text-label-md text-on-surface-variant hover:text-primary transition-colors px-4 py-2"
           >
             Sign In
           </Link>
-          {/* Begin Session — primary CTA */}
           <Link
             href="/contact"
             className="bg-primary text-on-primary px-5 py-2.5 rounded-full font-headline text-label-md border-b-4 border-[#3435b0] btn-3d text-sm"
@@ -116,7 +123,7 @@ export default function Navbar() {
                       key={item.label}
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className="block font-headline text-label-md text-on-surface-variant/70 hover:text-primary py-1.5 transition-colors text-xs"
+                      className="block font-headline text-xs text-on-surface-variant/70 hover:text-primary py-1.5 transition-colors"
                     >
                       {item.label}
                     </Link>
