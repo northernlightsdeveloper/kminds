@@ -108,7 +108,7 @@ export default function WhyKminds() {
             </p>
           </div>
           <Link
-            href="/contact"
+            href="/begin-session"
             className="shrink-0 bg-secondary-container text-on-secondary-container px-8 py-4 rounded-full font-headline text-label-md border-b-4 border-secondary btn-3d whitespace-nowrap"
           >
             Begin a Personalised Session

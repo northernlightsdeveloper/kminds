@@ -1,8 +1,4 @@
-// src/data/content.ts
-// ─────────────────────────────────────────────────────────────
-// CONTENT DATA FILE — Single source of truth for all site text.
-// ✅ To change any text, edit it HERE only.
-// ─────────────────────────────────────────────────────────────
+// src/data/content.ts — Single source of truth for all site text.
 
 // ── NAVIGATION ───────────────────────────────────────────────
 export const navLinks = [
@@ -10,7 +6,7 @@ export const navLinks = [
     label: "Why KMinds",
     href: "#why-kminds",
     dropdown: [
-      { label: "Customised Learning", href: "#why-kminds" },
+      { label: "Customised Learning", href: "/customised-learning" },
       { label: "Reviews", href: "#testimonials" },
     ],
   },
@@ -26,11 +22,11 @@ export const navLinks = [
   },
   {
     label: "Programs",
-    href: "#categories",
+    href: "/courses",
     dropdown: [
-      { label: "Years 5–7", href: "#categories" },
-      { label: "Years 8–10", href: "#categories" },
-      { label: "Years 11–12", href: "#categories" },
+      { label: "Years 5–7", href: "/courses" },
+      { label: "Years 8–10", href: "/courses" },
+      { label: "Years 11–12", href: "/courses" },
     ],
   },
   { label: "FAQs", href: "#faq", dropdown: [] },
@@ -43,7 +39,7 @@ export const hero = {
   tagline: "Where Potential Becomes Performance",
   subTagline: "Clarity. Confidence. Academic Excellence.",
   body: "A structured learning experience designed for students who aim higher.",
-  primaryCta: { label: "Begin a Personalised Session", href: "/contact" },
+  primaryCta: { label: "Begin a Personalised Session", href: "/begin-session" },
   secondaryCta: { label: "Explore Programs", href: "/courses" },
   heroImageSrc:
     "https://lh3.googleusercontent.com/aida-public/AB6AXuCtaJVdf5WP63FxQ4gCiFbgwEGZN4kCwmz0BhIr7ml90nGgI43LISv4L7VNSmz1KWBDFBmQIwzQE8dop04PEnoSqT-H3XtIoPgPcnu4azTZZY1k-yMUs1t3s94edR_FAiaMhUQsYxrApD9lUohdE7KzbelswlTFgHEaBfL-_99bra4CY-HYYpev8bZicO3pmkUYfD8287Dp2rYb22SJnxhFvEl92voLNGfSAM60WIDik4znOJoUQuu5yD9KGKQIFkcFNNajlj8Y2WA",
@@ -395,12 +391,14 @@ export const faqItems = [
 export const footerLinks = {
   explore: [
     { label: "Why KMinds", href: "#why-kminds" },
+    { label: "Customised Learning", href: "/customised-learning" },
     { label: "Programs", href: "/courses" },
     { label: "Curriculums", href: "#curriculum" },
     { label: "FAQs", href: "#faq" },
   ],
   support: [
-    { label: "Contact Us", href: "/contact" },
+    { label: "Begin a Session", href: "/begin-session" },
+    { label: "Contact Us", href: "/begin-session" },
     { label: "Privacy Policy", href: "#" },
     { label: "Terms of Service", href: "#" },
   ],

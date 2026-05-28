@@ -14,7 +14,6 @@ export default function Curriculums() {
       id="curriculum"
       className="py-section-gap relative overflow-hidden bg-on-surface"
     >
-      {/* Subtle texture */}
       <div className="absolute inset-0 dot-grid opacity-10 pointer-events-none" />
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary-container to-tertiary-container" />
 
@@ -43,7 +42,7 @@ export default function Curriculums() {
               key={curr.id}
               className="group bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all duration-300 hover:-translate-y-1"
             >
-              {/* Header row */}
+              {/* Header */}
               <div className="flex items-start justify-between mb-6">
                 <div className="flex items-center gap-4">
                   <span
@@ -52,8 +51,9 @@ export default function Curriculums() {
                     {curr.code}
                   </span>
                   <div>
+                    {/* No book icon — just text */}
                     <h3 className="font-headline text-headline-md text-inverse-on-surface">
-                      📘 {curr.name}
+                      {curr.name}
                     </h3>
                     <p className="font-headline text-label-md text-inverse-on-surface/50 mt-0.5">
                       {curr.yearRange}
@@ -62,12 +62,10 @@ export default function Curriculums() {
                 </div>
               </div>
 
-              {/* Description */}
               <p className="font-body text-body-md text-inverse-on-surface/70 mb-6 leading-relaxed">
                 {curr.description}
               </p>
 
-              {/* Points */}
               <ul className="space-y-2.5 mb-6">
                 {curr.points.map((point) => (
                   <li
@@ -80,10 +78,10 @@ export default function Curriculums() {
                 ))}
               </ul>
 
-              {/* Footer */}
+              {/* Footer — italic, no finger icon */}
               <div className="border-t border-white/10 pt-4">
-                <p className="text-secondary-container font-headline text-label-md flex items-center gap-2">
-                  <span>👉</span> {curr.footer}
+                <p className="text-secondary-container font-headline text-label-md italic">
+                  {curr.footer}
                 </p>
               </div>
             </div>

@@ -42,7 +42,9 @@ export default function Hero() {
 
           {/* Body */}
           <p className="font-body text-body-lg text-on-surface-variant mb-10 max-w-lg leading-relaxed">
-            <span className="text-secondary font-bold">👉</span> {hero.body}
+            <em className="not-italic font-body text-body-lg text-on-surface-variant">
+              {hero.body}
+            </em>
           </p>
 
           {/* CTAs */}

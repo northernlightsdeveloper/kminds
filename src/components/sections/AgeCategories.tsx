@@ -1,5 +1,4 @@
 // src/components/sections/AgeCategories.tsx
-// Colors hardcoded — Tailwind purges dynamic class strings from data files.
 import Link from "next/link";
 import { ageCategories } from "@/data/content";
 
@@ -40,7 +39,6 @@ export default function AgeCategories() {
       className="py-section-gap relative overflow-hidden bg-surface-container-low"
     >
       <div className="absolute inset-0 geo-bg pointer-events-none" />
-
       <div className="relative px-4 md:px-margin-desktop max-w-[1280px] mx-auto">
         <div className="text-center mb-16">
           <span className="inline-block bg-primary-fixed text-primary font-headline text-label-md px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest">
@@ -67,14 +65,13 @@ export default function AgeCategories() {
                 href={cat.href}
                 className={`group relative p-8 rounded-[40px] cursor-pointer transition-all duration-300 flex flex-col overflow-hidden ${s.wrap} card-shadow hover:-translate-y-2 hover:shadow-2xl`}
               >
-                {/* Big number watermark */}
+                {/* Watermark number */}
                 <span
                   className={`absolute -bottom-4 -right-2 font-headline font-black text-9xl leading-none select-none pointer-events-none ${s.num}`}
                 >
                   {index + 1}
                 </span>
 
-                {/* Icon */}
                 <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:scale-110 transition-transform">
                   <span
                     className={`material-symbols-outlined text-3xl ${s.icon}`}
@@ -83,7 +80,6 @@ export default function AgeCategories() {
                   </span>
                 </div>
 
-                {/* Text */}
                 <h3
                   className={`font-headline font-bold text-2xl mb-1 ${s.title}`}
                 >
@@ -92,10 +88,11 @@ export default function AgeCategories() {
                 <p className={`font-headline text-label-md mb-2 ${s.muted}`}>
                   {cat.ageRange}
                 </p>
+                {/* Tagline — italic, no finger icon */}
                 <p
-                  className={`font-headline text-label-md mb-6 italic flex items-center gap-1 ${s.muted}`}
+                  className={`font-headline text-label-md mb-6 italic ${s.muted}`}
                 >
-                  <span>👉</span> {cat.tagline}
+                  {cat.tagline}
                 </p>
                 <p
                   className={`font-body text-body-md leading-relaxed mb-6 ${s.muted}`}
@@ -103,7 +100,6 @@ export default function AgeCategories() {
                   {cat.description}
                 </p>
 
-                {/* Points */}
                 <ul className="space-y-2 mb-8 flex-1">
                   {cat.points.map((point) => (
                     <li
