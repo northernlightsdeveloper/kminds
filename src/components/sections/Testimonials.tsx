@@ -18,7 +18,7 @@ const cardStyles = [
     stars: "text-amber-500",
   },
   {
-    wrap: "bg-primary text-on-primary",
+    wrap: "bg-primary",
     avatarBg: "bg-white/15",
     avatarIcon: "text-white/50",
     quote: "text-on-primary/80",
@@ -76,13 +76,15 @@ export default function Testimonials() {
   }, []);
 
   return (
+    // No overflow-hidden here — that's what clips the hover lift
     <section
       id="testimonials"
-      className="py-section-gap relative overflow-hidden bg-surface-container-low"
+      className="py-section-gap relative bg-surface-container-low"
     >
+      {/* Dot grid — clipped to section via absolute+inset, no overflow needed */}
       <div className="absolute inset-0 dot-grid opacity-20 pointer-events-none" />
 
-      {/* Header — constrained to max-width like other sections */}
+      {/* Header — same container as all other sections */}
       <div className="relative px-4 md:px-margin-desktop max-w-[1280px] mx-auto mb-14">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
           <div>
@@ -133,24 +135,30 @@ export default function Testimonials() {
         </div>
       </div>
 
-      {/* Scroll rail — full bleed */}
+      {/* Scroll rail — starts at same left edge as header content */}
       <div className="relative">
-        {/* Fade left */}
+        {/* Left fade */}
         <div
-          className={`absolute left-0 top-0 bottom-2 w-16 bg-gradient-to-r from-surface-container-low to-transparent z-10 pointer-events-none transition-opacity duration-200 ${
+          className={`absolute left-0 top-0 bottom-0 w-14 bg-gradient-to-r from-surface-container-low to-transparent z-10 pointer-events-none transition-opacity duration-200 ${
             canScrollLeft ? "opacity-100" : "opacity-0"
           }`}
         />
-        {/* Fade right */}
+        {/* Right fade */}
         <div
-          className={`absolute right-0 top-0 bottom-2 w-16 bg-gradient-to-l from-surface-container-low to-transparent z-10 pointer-events-none transition-opacity duration-200 ${
+          className={`absolute right-0 top-0 bottom-0 w-14 bg-gradient-to-l from-surface-container-low to-transparent z-10 pointer-events-none transition-opacity duration-200 ${
             canScrollRight ? "opacity-100" : "opacity-0"
           }`}
         />
 
+        {/*
+          px-4 md:px-margin-desktop — matches header left edge exactly.
+          py-4 — gives vertical room so hover lift isn't clipped by scroll container.
+          overflow-x-auto with overflow-y-visible would be ideal but CSS doesn't allow mixed
+          overflow axes, so we add py-4 + the section has no overflow-hidden.
+        */}
         <div
           ref={scrollRef}
-          className="flex gap-5 overflow-x-auto px-4 md:px-margin-desktop pb-6 snap-x snap-mandatory"
+          className="flex gap-5 overflow-x-auto py-4 px-4 md:px-margin-desktop pb-6 snap-x snap-mandatory"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {testimonials.map((t, index) => {
