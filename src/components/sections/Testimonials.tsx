@@ -4,7 +4,6 @@
 import { useRef, useState, useEffect } from "react";
 import { testimonials, testimonialsSection } from "@/data/content";
 
-// Matches the exact token pattern from AgeCategories / WhyKminds
 const cardStyles = [
   {
     wrap: "bg-secondary-fixed",
@@ -16,10 +15,10 @@ const cardStyles = [
     divider: "border-secondary/20",
     quoteAccent: "text-secondary/20",
     verified: "text-secondary",
-    stars: "text-secondary",
+    stars: "text-amber-500",
   },
   {
-    wrap: "bg-primary text-on-primary", // dark card — matches "dark" variant
+    wrap: "bg-primary text-on-primary",
     avatarBg: "bg-white/15",
     avatarIcon: "text-white/50",
     quote: "text-on-primary/80",
@@ -81,12 +80,11 @@ export default function Testimonials() {
       id="testimonials"
       className="py-section-gap relative overflow-hidden bg-surface-container-low"
     >
-      {/* Background accent — same dot-grid pattern as WhyKminds */}
       <div className="absolute inset-0 dot-grid opacity-20 pointer-events-none" />
 
-      <div className="relative px-4 md:px-margin-desktop max-w-[1280px] mx-auto">
-        {/* ── Header — matches WhyKminds 2-col layout ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end mb-14">
+      {/* Header — constrained to max-width like other sections */}
+      <div className="relative px-4 md:px-margin-desktop max-w-[1280px] mx-auto mb-14">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
           <div>
             <span className="inline-block bg-tertiary-fixed text-tertiary font-headline text-label-md px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest">
               Community
@@ -100,7 +98,6 @@ export default function Testimonials() {
             </h2>
           </div>
 
-          {/* Right col — tagline + aggregate rating */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-6">
             <p className="font-body text-body-lg text-on-surface-variant leading-relaxed flex-1">
               &ldquo;{testimonialsSection.headline}&rdquo;
@@ -136,14 +133,15 @@ export default function Testimonials() {
         </div>
       </div>
 
-      {/* ── Scroll rail — full bleed so cards peek at edges ── */}
+      {/* Scroll rail — full bleed */}
       <div className="relative">
-        {/* Fade edges */}
+        {/* Fade left */}
         <div
           className={`absolute left-0 top-0 bottom-2 w-16 bg-gradient-to-r from-surface-container-low to-transparent z-10 pointer-events-none transition-opacity duration-200 ${
             canScrollLeft ? "opacity-100" : "opacity-0"
           }`}
         />
+        {/* Fade right */}
         <div
           className={`absolute right-0 top-0 bottom-2 w-16 bg-gradient-to-l from-surface-container-low to-transparent z-10 pointer-events-none transition-opacity duration-200 ${
             canScrollRight ? "opacity-100" : "opacity-0"
@@ -152,7 +150,7 @@ export default function Testimonials() {
 
         <div
           ref={scrollRef}
-          className="flex gap-5 overflow-x-auto px-4 md:px-margin-desktop pb-4 snap-x snap-mandatory"
+          className="flex gap-5 overflow-x-auto px-4 md:px-margin-desktop pb-6 snap-x snap-mandatory"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {testimonials.map((t, index) => {
@@ -163,7 +161,7 @@ export default function Testimonials() {
                 key={t.id}
                 className={`
                   group relative
-                  w-[320px] md:w-[370px] flex-shrink-0 snap-start
+                  w-[300px] md:w-[330px] flex-shrink-0 snap-start
                   p-7 rounded-3xl flex flex-col justify-between
                   overflow-hidden card-shadow
                   border border-outline-variant/10
@@ -171,7 +169,7 @@ export default function Testimonials() {
                   ${s.wrap}
                 `}
               >
-                {/* Watermark number — same as WhyKminds / AgeCategories */}
+                {/* Watermark number */}
                 <span
                   className={`absolute -bottom-3 -right-1 font-headline font-black text-8xl leading-none select-none pointer-events-none ${s.quoteAccent}`}
                 >
