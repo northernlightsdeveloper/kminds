@@ -21,25 +21,31 @@ export default function Testimonials() {
             >
               Hear from our Community
             </h2>
-            <p className="text-primary font-headline text-body-md mt-3 flex items-center gap-2">
-              <span className="text-xl">👉</span>
+            <p className="text-primary font-headline text-body-md mt-3 italic">
               &ldquo;{testimonialsSection.headline}&rdquo;
             </p>
           </div>
-          {/* Star rating */}
-          <div className="flex items-center gap-1 shrink-0">
-            {[...Array(5)].map((_, i) => (
-              <span
-                key={i}
-                className="material-symbols-outlined text-secondary-container text-2xl"
-                style={{ fontVariationSettings: "'FILL' 1" }}
-              >
-                star
-              </span>
-            ))}
-            <span className="font-headline text-label-md text-on-surface-variant ml-2">
-              Rated 5/5 by parents
-            </span>
+          {/* Aggregate star rating */}
+          <div className="flex items-center gap-2 shrink-0">
+            <div className="flex">
+              {[...Array(5)].map((_, i) => (
+                <span
+                  key={i}
+                  className="material-symbols-outlined text-secondary-container text-2xl"
+                  style={{ fontVariationSettings: "'FILL' 1" }}
+                >
+                  star
+                </span>
+              ))}
+            </div>
+            <div>
+              <p className="font-headline text-label-md text-on-surface font-bold">
+                5.0 / 5.0
+              </p>
+              <p className="font-headline text-xs text-on-surface-variant">
+                From verified parents & students
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -49,15 +55,15 @@ export default function Testimonials() {
         {testimonials.map((t) => (
           <div
             key={t.id}
-            className={`min-w-[340px] md:min-w-[420px] p-8 rounded-[32px] snap-start flex flex-col justify-between relative overflow-hidden ${
+            className={`min-w-[340px] md:min-w-[440px] p-8 rounded-[32px] snap-start flex flex-col justify-between relative overflow-hidden flex-shrink-0 ${
               t.variant === "dark"
                 ? "bg-primary text-on-primary"
                 : "bg-white text-on-surface border border-outline-variant/20 card-shadow"
             }`}
           >
-            {/* Decorative quote mark */}
+            {/* Decorative watermark */}
             <div
-              className={`absolute top-4 right-6 font-headline font-black text-9xl leading-none select-none pointer-events-none ${
+              className={`absolute top-2 right-4 font-headline font-black text-9xl leading-none select-none pointer-events-none ${
                 t.variant === "dark" ? "text-white/5" : "text-primary/5"
               }`}
             >
@@ -65,24 +71,34 @@ export default function Testimonials() {
             </div>
 
             <div className="relative">
-              <span
-                className={`material-symbols-outlined text-4xl block mb-5 ${t.variant === "dark" ? "text-tertiary-fixed" : "text-secondary-container"}`}
-                style={{ fontVariationSettings: "'FILL' 1" }}
-              >
-                format_quote
-              </span>
+              {/* Stars */}
+              <div className="flex gap-0.5 mb-4">
+                {[...Array(t.stars)].map((_, i) => (
+                  <span
+                    key={i}
+                    className={`material-symbols-outlined text-lg ${t.variant === "dark" ? "text-secondary-container" : "text-secondary-container"}`}
+                    style={{ fontVariationSettings: "'FILL' 1" }}
+                  >
+                    star
+                  </span>
+                ))}
+              </div>
               <p
-                className={`font-body text-body-lg italic leading-relaxed ${t.variant === "dark" ? "text-on-primary/90" : "text-on-surface-variant"}`}
+                className={`font-body text-body-md italic leading-relaxed ${t.variant === "dark" ? "text-on-primary/90" : "text-on-surface-variant"}`}
               >
                 &ldquo;{t.quote}&rdquo;
               </p>
             </div>
 
-            <div className="mt-8 flex items-center gap-4 pt-6 border-t border-white/10">
+            <div
+              className={`mt-8 flex items-center gap-4 pt-5 border-t ${t.variant === "dark" ? "border-white/10" : "border-outline-variant/20"}`}
+            >
               <div
-                className={`w-12 h-12 rounded-full ${t.avatarColor} flex items-center justify-center`}
+                className={`w-12 h-12 rounded-full ${t.avatarColor} flex items-center justify-center shrink-0`}
               >
-                <span className="material-symbols-outlined text-on-surface/50">
+                <span
+                  className={`material-symbols-outlined ${t.variant === "dark" ? "text-on-primary/60" : "text-on-surface/40"}`}
+                >
                   person
                 </span>
               </div>
@@ -93,10 +109,19 @@ export default function Testimonials() {
                   {t.name}
                 </p>
                 <p
-                  className={`text-xs font-headline ${t.variant === "dark" ? "text-on-primary/70" : "text-on-surface-variant"}`}
+                  className={`text-xs font-headline ${t.variant === "dark" ? "text-on-primary/60" : "text-on-surface-variant"}`}
                 >
                   {t.role}
                 </p>
+              </div>
+              {/* Verified badge */}
+              <div className="ml-auto">
+                <span
+                  className={`material-symbols-outlined text-xl ${t.variant === "dark" ? "text-tertiary-fixed" : "text-tertiary"}`}
+                  style={{ fontVariationSettings: "'FILL' 1" }}
+                >
+                  verified
+                </span>
               </div>
             </div>
           </div>

@@ -1,6 +1,5 @@
 // src/data/content.ts — Single source of truth for all site text.
 
-// ── NAVIGATION ───────────────────────────────────────────────
 export const navLinks = [
   {
     label: "Why KMinds",
@@ -33,7 +32,6 @@ export const navLinks = [
   { label: "About Us", href: "#about", dropdown: [] },
 ];
 
-// ── HERO ─────────────────────────────────────────────────────
 export const hero = {
   brandName: "Kaleidoscopic Minds",
   tagline: "Where Potential Becomes Performance",
@@ -46,42 +44,54 @@ export const hero = {
   videoLabel: "Sample Class Recording",
 };
 
-// ── TESTIMONIALS ─────────────────────────────────────────────
 export const testimonialsSection = {
   headline: "Trusted by Parents. Valued by Students.",
 };
 
+// Real testimonials from actual reviews
 export const testimonials = [
   {
     id: 1,
+    name: "Mr. John Joseph",
+    role: "Parent of Year 10 Student",
     quote:
-      "The curriculum at Kaleidoscopic Minds is exactly what my daughter needed. She's finally excited about math and looks forward to every session!",
-    name: "Sarah J.",
-    role: "Parent of Year 7 Student",
-    avatarColor: "bg-secondary-fixed",
+      "I would like to say how beneficial the K-Minds program has been for my child. He has been with K-Minds for a year now and his school performance has increased tremendously. He is more engaged in his school work and getting better grades. K-Minds tutors go above and beyond to make sure he understands topics before moving on. They are kind and very understanding. Highly recommend.",
+    stars: 5,
+    avatarColor: "bg-primary-fixed-dim",
     variant: "light" as const,
   },
   {
     id: 2,
+    name: "Pretty",
+    role: "Parent of Year 10 Student",
     quote:
-      "I love how interactive the lessons are. It doesn't feel like school — it feels like an adventure. I've learned more here than anywhere else.",
-    name: "Leo M.",
-    role: "Year 9 Student",
-    avatarColor: "bg-primary-fixed-dim",
+      "As a parent of a year 10 student who has completed 200 classes with K-Minds, I highly recommend K-Minds for anyone seeking effective and supportive academic help. The tutors are knowledgeable, patient, and adaptable, providing personalized attention that leads to real improvements in both grades and confidence. Highly recommended for their quality and proven results.",
+    stars: 5,
+    avatarColor: "bg-secondary-fixed",
     variant: "dark" as const,
   },
   {
     id: 3,
+    name: "Kitty Khattar",
+    role: "Parent of Year 7 Student",
     quote:
-      "The transition to IGCSE was daunting, but the support here made it seamless. The mentors are truly world-class and very patient.",
-    name: "David R.",
-    role: "Parent of Year 10 Student",
+      "Tavish received an A- in Semester 1 and an A in Semester 2 for Science. We are so proud of how far he has come, especially since this is his first year of high school at one of the top schools in the state. Your guidance, patience, and way of teaching have made such a big difference. We truly can't thank you enough.",
+    stars: 5,
     avatarColor: "bg-tertiary-fixed",
+    variant: "light" as const,
+  },
+  {
+    id: 4,
+    name: "Zeynab",
+    role: "Science Student",
+    quote:
+      "I just wanted to say that I finished my bio exam and it went quite well — it was easier than I expected, which was a nice surprise. Once again thank you so much for being such a great teacher. I really enjoyed being your student!",
+    stars: 5,
+    avatarColor: "bg-primary-fixed",
     variant: "light" as const,
   },
 ];
 
-// ── CURRICULUMS ───────────────────────────────────────────────
 export const curriculums = [
   {
     id: 1,
@@ -150,7 +160,6 @@ export const curriculums = [
   },
 ];
 
-// ── AGE CATEGORIES ───────────────────────────────────────────
 export const ageCategories = [
   {
     id: 1,
@@ -199,7 +208,6 @@ export const ageCategories = [
   },
 ];
 
-// ── WHY KMINDS ───────────────────────────────────────────────
 export const whyKminds = [
   {
     id: 1,
@@ -227,7 +235,6 @@ export const whyKminds = [
   },
 ];
 
-// ── FOUNDER ──────────────────────────────────────────────────
 export const founder = {
   eyebrow: "About Kaleidoscopic Minds",
   headline: "Every mind is unique. We build the system around it.",
@@ -246,13 +253,12 @@ export const founder = {
     { value: "4", label: "Curriculums" },
     { value: "1:1", label: "Sessions" },
   ],
-  founderName: "Founder, Kaleidoscopic Minds",
-  founderTitle: "Educator & Academic Mentor",
+  founderName: "Khadija Topiwala",
+  founderTitle: "Founder, Kaleidoscopic Minds",
   imageSrc:
     "https://lh3.googleusercontent.com/aida-public/AB6AXuCCccehq32S2xTup5U47MSrwuZygTkvE-PdY_GSNLdcEvv4FBb45gNr04e-yMGG_pwzU_MyZCpfh6hyI2ECW9PoqrtmIjNLXMZ3x8ZkhpKDL2G73KF_vIIHmHzmrEfvpQNJ6wwryLnKMuKgQQcepBujy-V6lmv_EtzfPKSIQHUMMbYLHpJMLe9Aa8i3ZHk5ZAmFgXaG3aKxN5oIDU169kfqhYBBKvZN09oBwp_fd9rFb51LHqd_zXktFS-xAofv0fdvouYKW1B8FN8",
 };
 
-// ── FAQ ──────────────────────────────────────────────────────
 export const faqItems = [
   {
     id: 1,
@@ -387,7 +393,6 @@ export const faqItems = [
   },
 ];
 
-// ── FOOTER ───────────────────────────────────────────────────
 export const footerLinks = {
   explore: [
     { label: "Why KMinds", href: "#why-kminds" },
@@ -398,14 +403,13 @@ export const footerLinks = {
   ],
   support: [
     { label: "Begin a Session", href: "/begin-session" },
-    { label: "Contact Us", href: "/begin-session" },
     { label: "Privacy Policy", href: "#" },
     { label: "Terms of Service", href: "#" },
   ],
 };
 
 export const contactInfo = {
-  email: "hello@kaleidoscopicminds.com.au",
+  email: "kaleidoscopicminds.kl@gmail.com",
   phone: "+91 6268 300 535",
   whatsapp: "916268300535",
 };

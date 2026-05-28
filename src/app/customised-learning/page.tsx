@@ -104,7 +104,7 @@ export default function CustomisedLearningPage() {
         <div className="relative max-w-[1280px] mx-auto text-center">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-inverse-on-surface/50 hover:text-inverse-on-surface font-headline text-label-md mb-8 transition-colors"
+            className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-inverse-on-surface hover:bg-white/20 font-headline text-label-md px-4 py-2.5 rounded-full transition-all mb-8"
           >
             <span className="material-symbols-outlined text-base">
               arrow_back
