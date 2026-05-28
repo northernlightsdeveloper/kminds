@@ -1,7 +1,7 @@
 // src/components/sections/Testimonials.tsx
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { testimonials, testimonialsSection } from "@/data/content";
 
 export default function Testimonials() {
@@ -24,26 +24,20 @@ export default function Testimonials() {
     return () => el.removeEventListener("scroll", checkScroll);
   }, []);
 
-  const scroll = (dir: "left" | "right") => {
-    const el = scrollRef.current;
-    if (!el) return;
-    el.scrollBy({ left: dir === "left" ? -460 : 460, behavior: "smooth" });
-  };
-
   return (
     <section
       id="testimonials"
-      className="bg-surface-container-low py-20 md:py-28 overflow-hidden relative"
+      className="bg-surface-container-low py-16 md:py-24 overflow-hidden relative"
     >
       {/* Background decorations */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-tertiary/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* Header */}
-      <div className="px-4 md:px-16 max-w-[1280px] mx-auto mb-12">
+      <div className="px-4 md:px-12 mb-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
-            <span className="inline-flex items-center gap-1.5 bg-tertiary/10 text-tertiary font-semibold text-xs px-4 py-1.5 rounded-full mb-5 uppercase tracking-widest">
+            <span className="inline-flex items-center gap-1.5 bg-tertiary/10 text-tertiary font-semibold text-xs px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest">
               <span
                 className="material-symbols-outlined text-sm"
                 style={{ fontVariationSettings: "'FILL' 1" }}
@@ -52,26 +46,26 @@ export default function Testimonials() {
               </span>
               Community
             </span>
-            <h2 className="font-extrabold text-on-surface text-4xl md:text-5xl leading-tight tracking-tight">
+            <h2 className="font-extrabold text-on-surface text-3xl md:text-4xl leading-tight tracking-tight">
               Hear from our{" "}
               <span className="text-primary italic">Community</span>
             </h2>
-            <p className="text-on-surface-variant text-base mt-3 font-medium">
+            <p className="text-on-surface-variant text-sm mt-2 font-medium">
               &ldquo;{testimonialsSection.headline}&rdquo;
             </p>
           </div>
 
           {/* Aggregate rating */}
-          <div className="flex items-center gap-4 shrink-0 bg-white/70 backdrop-blur-sm border border-outline-variant/20 rounded-2xl px-6 py-4 shadow-sm">
+          <div className="flex items-center gap-4 shrink-0 bg-white/70 backdrop-blur-sm border border-outline-variant/20 rounded-2xl px-5 py-3.5 shadow-sm">
             <div className="flex flex-col items-center">
-              <span className="text-3xl font-extrabold text-on-surface leading-none">
+              <span className="text-2xl font-extrabold text-on-surface leading-none">
                 5.0
               </span>
               <div className="flex gap-0.5 mt-1">
                 {[...Array(5)].map((_, i) => (
                   <span
                     key={i}
-                    className="material-symbols-outlined text-amber-400 text-lg"
+                    className="material-symbols-outlined text-amber-400 text-base"
                     style={{ fontVariationSettings: "'FILL' 1" }}
                   >
                     star
@@ -79,12 +73,12 @@ export default function Testimonials() {
                 ))}
               </div>
             </div>
-            <div className="w-px h-10 bg-outline-variant/30" />
+            <div className="w-px h-9 bg-outline-variant/30" />
             <div>
-              <p className="font-bold text-on-surface text-sm leading-tight">
+              <p className="font-bold text-on-surface text-xs leading-tight">
                 Verified Rating
               </p>
-              <p className="text-xs text-on-surface-variant mt-0.5">
+              <p className="text-[11px] text-on-surface-variant mt-0.5">
                 From parents & students
               </p>
             </div>
@@ -92,43 +86,47 @@ export default function Testimonials() {
         </div>
       </div>
 
-      {/* Cards row */}
+      {/* Cards scroll rail */}
       <div className="relative">
         {/* Left fade */}
         <div
-          className={`absolute left-0 top-0 bottom-6 w-20 bg-gradient-to-r from-surface-container-low to-transparent z-10 pointer-events-none transition-opacity duration-200 ${
+          className={`absolute left-0 top-0 bottom-2 w-12 bg-gradient-to-r from-surface-container-low to-transparent z-10 pointer-events-none transition-opacity duration-200 ${
             canScrollLeft ? "opacity-100" : "opacity-0"
           }`}
         />
         {/* Right fade */}
         <div
-          className={`absolute right-0 top-0 bottom-6 w-20 bg-gradient-to-l from-surface-container-low to-transparent z-10 pointer-events-none transition-opacity duration-200 ${
+          className={`absolute right-0 top-0 bottom-2 w-12 bg-gradient-to-l from-surface-container-low to-transparent z-10 pointer-events-none transition-opacity duration-200 ${
             canScrollRight ? "opacity-100" : "opacity-0"
           }`}
         />
 
         <div
           ref={scrollRef}
-          className="flex gap-5 overflow-x-auto px-4 md:px-16 pb-6 snap-x snap-mandatory scrollbar-none"
+          className="flex gap-3.5 overflow-x-auto px-4 md:px-12 pb-4 snap-x snap-mandatory scrollbar-none"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {testimonials.map((t) => (
             <div
               key={t.id}
               className={`
-                group min-w-[340px] md:min-w-[420px] flex-shrink-0 snap-start
-                p-8 rounded-3xl flex flex-col justify-between relative overflow-hidden
-                transition-transform duration-300 hover:-translate-y-1
-                ${
-                  t.variant === "dark"
-                    ? "bg-primary text-on-primary shadow-xl shadow-primary/20"
-                    : "bg-white text-on-surface border border-outline-variant/20 shadow-md shadow-black/5"
-                }
-              `}
+  group min-w-[260px] max-w-[280px] flex-shrink-0 snap-start
+  p-5 rounded-2xl flex flex-col justify-between relative overflow-hidden
+  transition-transform duration-300 hover:-translate-y-1
+  ${
+    t.variant === "dark"
+      ? "bg-primary text-on-primary shadow-lg shadow-primary/20"
+      : t.id % 3 === 0
+        ? "bg-[#fef3e2] text-on-surface border border-[#f5e0b8]/60 shadow shadow-black/5" // peach
+        : t.id % 3 === 1
+          ? "bg-[#eef0ff] text-on-surface border border-[#d8dbf5]/60 shadow shadow-black/5" // lavender
+          : "bg-[#e6f7f4] text-on-surface border border-[#b8e8e0]/60 shadow shadow-black/5" // mint
+  }
+`}
             >
               {/* Decorative quote mark */}
               <div
-                className={`absolute -top-2 right-6 font-serif font-black leading-none select-none pointer-events-none text-[120px] ${
+                className={`absolute -top-1 right-4 font-serif font-black leading-none select-none pointer-events-none text-[80px] ${
                   t.variant === "dark" ? "text-white/8" : "text-primary/6"
                 }`}
               >
@@ -137,11 +135,11 @@ export default function Testimonials() {
 
               <div className="relative">
                 {/* Stars */}
-                <div className="flex gap-0.5 mb-5">
+                <div className="flex gap-0.5 mb-3">
                   {[...Array(t.stars)].map((_, i) => (
                     <span
                       key={i}
-                      className="material-symbols-outlined text-amber-400 text-xl"
+                      className="material-symbols-outlined text-amber-400 text-base"
                       style={{ fontVariationSettings: "'FILL' 1" }}
                     >
                       star
@@ -151,10 +149,14 @@ export default function Testimonials() {
 
                 {/* Quote */}
                 <p
-                  className={`text-[15px] leading-relaxed font-medium ${
+                  className={`absolute -top-1 right-4 font-serif font-black leading-none select-none pointer-events-none text-[80px] ${
                     t.variant === "dark"
-                      ? "text-on-primary/85"
-                      : "text-on-surface-variant"
+                      ? "text-white/8"
+                      : t.id % 3 === 0
+                        ? "text-amber-400/10"
+                        : t.id % 3 === 1
+                          ? "text-primary/8"
+                          : "text-tertiary/10"
                   }`}
                 >
                   &ldquo;{t.quote}&rdquo;
@@ -163,19 +165,23 @@ export default function Testimonials() {
 
               {/* Author */}
               <div
-                className={`mt-8 flex items-center gap-3 pt-5 border-t ${
+                className={`mt-5 flex items-center gap-2.5 pt-4 border-t ${
                   t.variant === "dark"
                     ? "border-white/10"
-                    : "border-outline-variant/20"
+                    : t.id % 3 === 0
+                      ? "border-amber-300/30"
+                      : t.id % 3 === 1
+                        ? "border-primary/15"
+                        : "border-tertiary/20"
                 }`}
               >
                 <div
-                  className={`w-11 h-11 rounded-full ${t.avatarColor} flex items-center justify-center shrink-0 ring-2 ${
+                  className={`w-9 h-9 rounded-full ${t.avatarColor} flex items-center justify-center shrink-0 ring-2 ${
                     t.variant === "dark" ? "ring-white/10" : "ring-primary/10"
                   }`}
                 >
                   <span
-                    className={`material-symbols-outlined text-xl ${
+                    className={`material-symbols-outlined text-base ${
                       t.variant === "dark"
                         ? "text-on-primary/50"
                         : "text-on-surface/30"
@@ -186,7 +192,7 @@ export default function Testimonials() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p
-                    className={`font-bold text-sm truncate ${
+                    className={`font-bold text-xs truncate ${
                       t.variant === "dark"
                         ? "text-on-primary"
                         : "text-on-surface"
@@ -195,7 +201,7 @@ export default function Testimonials() {
                     {t.name}
                   </p>
                   <p
-                    className={`text-xs mt-0.5 truncate ${
+                    className={`text-[10.5px] mt-0.5 truncate ${
                       t.variant === "dark"
                         ? "text-on-primary/55"
                         : "text-on-surface-variant"
@@ -205,63 +211,20 @@ export default function Testimonials() {
                   </p>
                 </div>
                 {/* Verified badge */}
-                <div className="flex items-center gap-1 shrink-0">
-                  <span
-                    className={`material-symbols-outlined text-lg ${
-                      t.variant === "dark"
-                        ? "text-tertiary-fixed"
-                        : "text-tertiary"
-                    }`}
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                  >
-                    verified
-                  </span>
-                  <span
-                    className={`text-xs font-medium hidden sm:block ${
-                      t.variant === "dark"
-                        ? "text-tertiary-fixed"
-                        : "text-tertiary"
-                    }`}
-                  >
-                    Verified
-                  </span>
-                </div>
+                <span
+                  className={`material-symbols-outlined text-base shrink-0 ${
+                    t.variant === "dark"
+                      ? "text-tertiary-fixed"
+                      : "text-tertiary"
+                  }`}
+                  style={{ fontVariationSettings: "'FILL' 1" }}
+                >
+                  verified
+                </span>
               </div>
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Navigation arrows */}
-      <div className="flex gap-3 justify-center mt-6">
-        <button
-          onClick={() => scroll("left")}
-          disabled={!canScrollLeft}
-          className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-200 ${
-            canScrollLeft
-              ? "border-outline-variant bg-white hover:bg-primary hover:border-primary hover:text-on-primary text-on-surface shadow-sm"
-              : "border-outline-variant/30 bg-transparent text-on-surface/20 cursor-not-allowed"
-          }`}
-          aria-label="Scroll left"
-        >
-          <span className="material-symbols-outlined text-lg">
-            chevron_left
-          </span>
-        </button>
-        <button
-          onClick={() => scroll("right")}
-          disabled={!canScrollRight}
-          className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-200 ${
-            canScrollRight
-              ? "border-outline-variant bg-white hover:bg-primary hover:border-primary hover:text-on-primary text-on-surface shadow-sm"
-              : "border-outline-variant/30 bg-transparent text-on-surface/20 cursor-not-allowed"
-          }`}
-          aria-label="Scroll right"
-        >
-          <span className="material-symbols-outlined text-lg">
-            chevron_right
-          </span>
-        </button>
       </div>
     </section>
   );
