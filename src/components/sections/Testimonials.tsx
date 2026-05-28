@@ -1,7 +1,7 @@
 // src/components/sections/Testimonials.tsx
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { testimonials, testimonialsSection } from "@/data/content";
 
 export default function Testimonials() {
@@ -23,6 +23,28 @@ export default function Testimonials() {
     checkScroll();
     return () => el.removeEventListener("scroll", checkScroll);
   }, []);
+
+  // Cycle through subtle tinted backgrounds for light cards
+  const lightCardStyles = [
+    {
+      bg: "bg-[#fef3e2]",
+      border: "border-[#f5e0b8]/60",
+      quoteMark: "text-amber-400/20",
+      divider: "border-amber-300/30",
+    },
+    {
+      bg: "bg-[#eef0ff]",
+      border: "border-[#d8dbf5]/60",
+      quoteMark: "text-primary/15",
+      divider: "border-primary/15",
+    },
+    {
+      bg: "bg-[#e6f7f4]",
+      border: "border-[#b8e8e0]/60",
+      quoteMark: "text-tertiary/20",
+      divider: "border-tertiary/20",
+    },
+  ];
 
   return (
     <section
@@ -79,7 +101,7 @@ export default function Testimonials() {
                 Verified Rating
               </p>
               <p className="text-[11px] text-on-surface-variant mt-0.5">
-                From parents & students
+                From parents &amp; students
               </p>
             </div>
           </div>
@@ -90,140 +112,134 @@ export default function Testimonials() {
       <div className="relative">
         {/* Left fade */}
         <div
-          className={`absolute left-0 top-0 bottom-2 w-12 bg-gradient-to-r from-surface-container-low to-transparent z-10 pointer-events-none transition-opacity duration-200 ${
+          className={`absolute left-0 top-0 bottom-2 w-14 bg-gradient-to-r from-surface-container-low to-transparent z-10 pointer-events-none transition-opacity duration-200 ${
             canScrollLeft ? "opacity-100" : "opacity-0"
           }`}
         />
         {/* Right fade */}
         <div
-          className={`absolute right-0 top-0 bottom-2 w-12 bg-gradient-to-l from-surface-container-low to-transparent z-10 pointer-events-none transition-opacity duration-200 ${
+          className={`absolute right-0 top-0 bottom-2 w-14 bg-gradient-to-l from-surface-container-low to-transparent z-10 pointer-events-none transition-opacity duration-200 ${
             canScrollRight ? "opacity-100" : "opacity-0"
           }`}
         />
 
         <div
           ref={scrollRef}
-          className="flex gap-3.5 overflow-x-auto px-4 md:px-12 pb-4 snap-x snap-mandatory scrollbar-none"
+          className="flex gap-4 overflow-x-auto px-4 md:px-12 pb-4 snap-x snap-mandatory"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {testimonials.map((t) => (
-            <div
-              key={t.id}
-              className={`
-  group min-w-[260px] max-w-[280px] flex-shrink-0 snap-start
-  p-5 rounded-2xl flex flex-col justify-between relative overflow-hidden
-  transition-transform duration-300 hover:-translate-y-1
-  ${
-    t.variant === "dark"
-      ? "bg-primary text-on-primary shadow-lg shadow-primary/20"
-      : t.id % 3 === 0
-        ? "bg-[#fef3e2] text-on-surface border border-[#f5e0b8]/60 shadow shadow-black/5" // peach
-        : t.id % 3 === 1
-          ? "bg-[#eef0ff] text-on-surface border border-[#d8dbf5]/60 shadow shadow-black/5" // lavender
-          : "bg-[#e6f7f4] text-on-surface border border-[#b8e8e0]/60 shadow shadow-black/5" // mint
-  }
-`}
-            >
-              {/* Decorative quote mark */}
-              <div
-                className={`absolute -top-1 right-4 font-serif font-black leading-none select-none pointer-events-none text-[80px] ${
-                  t.variant === "dark" ? "text-white/8" : "text-primary/6"
-                }`}
-              >
-                &ldquo;
-              </div>
+          {testimonials.map((t, index) => {
+            const style = lightCardStyles[index % lightCardStyles.length];
+            const isDark = t.variant === "dark";
 
-              <div className="relative">
-                {/* Stars */}
-                <div className="flex gap-0.5 mb-3">
-                  {[...Array(t.stars)].map((_, i) => (
+            return (
+              <div
+                key={t.id}
+                className={`
+                  group w-[320px] md:w-[360px] flex-shrink-0 snap-start
+                  p-6 rounded-2xl flex flex-col justify-between relative overflow-hidden
+                  transition-transform duration-300 hover:-translate-y-1
+                  ${
+                    isDark
+                      ? "bg-primary text-on-primary shadow-lg shadow-primary/20"
+                      : `${style.bg} text-on-surface border ${style.border} shadow shadow-black/5`
+                  }
+                `}
+              >
+                {/* Decorative quote mark — small and clipped */}
+                <span
+                  className={`absolute top-3 right-4 font-serif font-black leading-none select-none pointer-events-none text-5xl ${
+                    isDark ? "text-white/15" : style.quoteMark
+                  }`}
+                >
+                  &ldquo;
+                </span>
+
+                <div className="relative">
+                  {/* Stars */}
+                  <div className="flex gap-0.5 mb-4">
+                    {[...Array(t.stars)].map((_, i) => (
+                      <span
+                        key={i}
+                        className="material-symbols-outlined text-amber-400 text-lg"
+                        style={{ fontVariationSettings: "'FILL' 1" }}
+                      >
+                        star
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Quote */}
+                  <p
+                    className={`text-sm leading-relaxed font-medium ${
+                      isDark ? "text-on-primary/85" : "text-on-surface-variant"
+                    }`}
+                  >
+                    &ldquo;{t.quote}&rdquo;
+                  </p>
+                </div>
+
+                {/* Author */}
+                <div
+                  className={`mt-6 flex items-center gap-3 pt-4 border-t ${
+                    isDark ? "border-white/10" : style.divider
+                  }`}
+                >
+                  <div
+                    className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ring-2 ${
+                      isDark
+                        ? "bg-white/12 ring-white/10"
+                        : `${t.avatarColor} ring-primary/10`
+                    }`}
+                  >
                     <span
-                      key={i}
-                      className="material-symbols-outlined text-amber-400 text-base"
+                      className={`material-symbols-outlined text-lg ${
+                        isDark ? "text-on-primary/40" : "text-on-surface/30"
+                      }`}
+                    >
+                      person
+                    </span>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p
+                      className={`font-bold text-sm truncate ${
+                        isDark ? "text-on-primary" : "text-on-surface"
+                      }`}
+                    >
+                      {t.name}
+                    </p>
+                    <p
+                      className={`text-xs mt-0.5 truncate ${
+                        isDark
+                          ? "text-on-primary/55"
+                          : "text-on-surface-variant"
+                      }`}
+                    >
+                      {t.role}
+                    </p>
+                  </div>
+                  {/* Verified badge */}
+                  <div className="flex items-center gap-1 shrink-0">
+                    <span
+                      className={`material-symbols-outlined text-lg ${
+                        isDark ? "text-tertiary-fixed" : "text-tertiary"
+                      }`}
                       style={{ fontVariationSettings: "'FILL' 1" }}
                     >
-                      star
+                      verified
                     </span>
-                  ))}
+                    <span
+                      className={`text-xs font-medium hidden sm:block ${
+                        isDark ? "text-tertiary-fixed" : "text-tertiary"
+                      }`}
+                    >
+                      Verified
+                    </span>
+                  </div>
                 </div>
-
-                {/* Quote */}
-                <p
-                  className={`absolute -top-1 right-4 font-serif font-black leading-none select-none pointer-events-none text-[80px] ${
-                    t.variant === "dark"
-                      ? "text-white/8"
-                      : t.id % 3 === 0
-                        ? "text-amber-400/10"
-                        : t.id % 3 === 1
-                          ? "text-primary/8"
-                          : "text-tertiary/10"
-                  }`}
-                >
-                  &ldquo;{t.quote}&rdquo;
-                </p>
               </div>
-
-              {/* Author */}
-              <div
-                className={`mt-5 flex items-center gap-2.5 pt-4 border-t ${
-                  t.variant === "dark"
-                    ? "border-white/10"
-                    : t.id % 3 === 0
-                      ? "border-amber-300/30"
-                      : t.id % 3 === 1
-                        ? "border-primary/15"
-                        : "border-tertiary/20"
-                }`}
-              >
-                <div
-                  className={`w-9 h-9 rounded-full ${t.avatarColor} flex items-center justify-center shrink-0 ring-2 ${
-                    t.variant === "dark" ? "ring-white/10" : "ring-primary/10"
-                  }`}
-                >
-                  <span
-                    className={`material-symbols-outlined text-base ${
-                      t.variant === "dark"
-                        ? "text-on-primary/50"
-                        : "text-on-surface/30"
-                    }`}
-                  >
-                    person
-                  </span>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p
-                    className={`font-bold text-xs truncate ${
-                      t.variant === "dark"
-                        ? "text-on-primary"
-                        : "text-on-surface"
-                    }`}
-                  >
-                    {t.name}
-                  </p>
-                  <p
-                    className={`text-[10.5px] mt-0.5 truncate ${
-                      t.variant === "dark"
-                        ? "text-on-primary/55"
-                        : "text-on-surface-variant"
-                    }`}
-                  >
-                    {t.role}
-                  </p>
-                </div>
-                {/* Verified badge */}
-                <span
-                  className={`material-symbols-outlined text-base shrink-0 ${
-                    t.variant === "dark"
-                      ? "text-tertiary-fixed"
-                      : "text-tertiary"
-                  }`}
-                  style={{ fontVariationSettings: "'FILL' 1" }}
-                >
-                  verified
-                </span>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
