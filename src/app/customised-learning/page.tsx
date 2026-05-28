@@ -102,15 +102,6 @@ export default function CustomisedLearningPage() {
         <div className="absolute inset-0 dot-grid opacity-10 pointer-events-none" />
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary-container to-tertiary-container" />
         <div className="relative max-w-[1280px] mx-auto text-center">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-inverse-on-surface hover:bg-white/20 font-headline text-label-md px-4 py-2.5 rounded-full transition-all mb-8"
-          >
-            <span className="material-symbols-outlined text-base">
-              arrow_back
-            </span>
-            Back to Home
-          </Link>
           <span className="inline-block bg-white/10 text-inverse-on-surface font-headline text-label-md px-4 py-1.5 rounded-full mb-6 uppercase tracking-widest border border-white/10">
             Our Approach
           </span>
