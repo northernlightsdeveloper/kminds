@@ -413,8 +413,8 @@ export const footerLinks = {
   ],
   support: [
     { label: "Begin a Session", href: "/begin-session" },
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms of Service", href: "/terms-of-service" },
   ],
 };
 
