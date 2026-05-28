@@ -14,7 +14,7 @@
 import { useState } from "react";
 
 // ── CONFIG — edit these two values only ──────────────────────
-const WHATSAPP_NUMBER = "916268300535"; // country code + number, no spaces or +
+const WHATSAPP_NUMBER = "916267000755"; // country code + number, no spaces or +
 const WHATSAPP_MESSAGE =
   "Hi! I'd like to know more about Kaleidoscopic Minds programs.";
 
