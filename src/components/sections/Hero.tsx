@@ -162,12 +162,13 @@ export default function Hero() {
 
           {/* ── VIDEO CARD ── */}
           <div className="relative aspect-[4/3] rounded-[40px] overflow-hidden card-shadow border-4 border-white">
-
             {/* Render both videos, only show the active one */}
             {videos.map((v, i) => (
               <video
                 key={i}
-                ref={(el) => { videoRefs.current[i] = el; }}
+                ref={(el) => {
+                  videoRefs.current[i] = el;
+                }}
                 src={v.src}
                 autoPlay={i === 0}
                 muted
@@ -175,7 +176,10 @@ export default function Hero() {
                 playsInline
                 className={[
                   "absolute inset-0 w-full h-full object-cover transition-opacity duration-500",
-                  i === activeTab ? "opacity-100" : "opacity-0 pointer-events-none",
+                  i === activeTab
+                    ? "opacity-100"
+                    : "opacity-0 pointer-events-none",
+                  i === 1 ? "object-right" : "object-center",
                 ].join(" ")}
               />
             ))}
