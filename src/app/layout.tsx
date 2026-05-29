@@ -100,9 +100,8 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      {/* bg-[#0f1628] matches footer dark color — fixes white
-          scroll-bounce gap at the bottom of the page on Mac/iOS  */}
-      <body className="bg-[#0f1628]">
+
+      <body>
         <Navbar />
         <main>{children}</main>
         <Footer />
