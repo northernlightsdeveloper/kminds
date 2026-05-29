@@ -13,11 +13,23 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           {/* Brand column */}
           <div className="md:col-span-1">
-            <div className="font-headline font-extrabold text-inverse-on-surface text-xl leading-tight mb-4">
-              Kaleidoscopic
-              <br />
-              <span className="text-secondary-container">Minds</span>
-            </div>
+            <Link href="/" className="inline-flex items-center gap-3 mb-4">
+              <img
+                src="/Kaliedoscopic Minds.svg"
+                alt="Kaleidoscopic Minds"
+                className="h-16 w-auto"
+              />
+
+              <div className="leading-tight">
+                <div className="font-headline font-extrabold text-inverse-on-surface text-2xl">
+                  Kaleidoscopic
+                </div>
+
+                <div className="font-headline font-extrabold text-secondary-container text-2xl -mt-1">
+                  Minds
+                </div>
+              </div>
+            </Link>
             <p className="text-inverse-on-surface/50 font-body text-body-md leading-relaxed mb-6">
               Where Potential Becomes Performance. Structured, personalised
               learning for Australian students.
