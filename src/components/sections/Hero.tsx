@@ -1,5 +1,4 @@
 // src/components/sections/Hero.tsx
-import Image from "next/image";
 import Link from "next/link";
 import { hero } from "@/data/content";
 
@@ -120,29 +119,19 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Video thumbnail */}
+          {/* ── VIDEO — autoplays muted, loops silently ── */}
           <div className="relative aspect-[4/3] rounded-[40px] overflow-hidden card-shadow border-4 border-white">
-            <Image
-              src={hero.heroImageSrc}
-              alt="KMinds sample class"
-              fill
-              className="object-cover"
-              priority
+            <video
+              src={hero.heroVideoSrc}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
             />
+            {/* Gradient overlay so badge stays readable */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <button
-                className="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center text-primary shadow-2xl hover:scale-110 hover:bg-white transition-all"
-                aria-label="Play"
-              >
-                <span
-                  className="material-symbols-outlined text-5xl"
-                  style={{ fontVariationSettings: "'FILL' 1" }}
-                >
-                  play_circle
-                </span>
-              </button>
-            </div>
+            {/* Live badge */}
             <div className="absolute bottom-6 left-6 glass-card px-4 py-2 rounded-full flex items-center gap-2 shadow-sm">
               <span className="w-2.5 h-2.5 bg-error rounded-full animate-pulse" />
               <span className="font-headline text-label-md text-on-surface">

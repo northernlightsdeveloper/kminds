@@ -39,8 +39,11 @@ export const hero = {
   body: "A structured learning experience designed for students who aim higher.",
   primaryCta: { label: "Begin a Personalised Session", href: "/begin-session" },
   secondaryCta: { label: "Explore Programs", href: "/courses" },
-  heroImageSrc:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuCtaJVdf5WP63FxQ4gCiFbgwEGZN4kCwmz0BhIr7ml90nGgI43LISv4L7VNSmz1KWBDFBmQIwzQE8dop04PEnoSqT-H3XtIoPgPcnu4azTZZY1k-yMUs1t3s94edR_FAiaMhUQsYxrApD9lUohdE7KzbelswlTFgHEaBfL-_99bra4CY-HYYpev8bZicO3pmkUYfD8287Dp2rYb22SJnxhFvEl92voLNGfSAM60WIDik4znOJoUQuu5yD9KGKQIFkcFNNajlj8Y2WA",
+  // ── VIDEO URL ─────────────────────────────────────────────
+  // Replace with your Cloudinary video URL ending in .mp4
+  // Get it from: Cloudinary → Media Library → click video → copy URL
+  heroVideoSrc:
+    "https://res.cloudinary.com/dimqweehx/video/upload/v1780045509/Screen_Recording_2026-03-11_141436_zr8qed.mp4",
   videoLabel: "Sample Class Recording",
 };
 
