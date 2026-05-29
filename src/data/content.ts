@@ -89,6 +89,16 @@ export const testimonials = [
     avatarColor: "bg-primary-fixed",
     variant: "light" as const,
   },
+  {
+    id: 5,
+    name: "Mrs. Anita Sharma",
+    role: "Parent of Year 9 Student",
+    quote:
+      "K-Minds has been a turning point for my son. The one-on-one attention and structured approach made a huge difference — he went from dreading exams to feeling genuinely prepared and confident.",
+    stars: 5,
+    avatarColor: "bg-tertiary-fixed-dim",
+    variant: "light" as const,
+  },
 ];
 
 export const curriculums = [
