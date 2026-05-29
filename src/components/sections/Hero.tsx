@@ -63,7 +63,7 @@ export default function Hero() {
           {/* Headline — clamp reduced from 2rem–3.5rem to 1.6rem–2.8rem */}
           <h1
             className="font-headline font-extrabold text-on-surface mb-5 leading-[1.1]"
-            style={{ fontSize: "clamp(1.6rem, 4vw, 2.8rem)" }}
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
           >
             {hero.tagline}
           </h1>
