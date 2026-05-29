@@ -17,7 +17,7 @@ export default function Footer() {
               <img
                 src="/Kaliedoscopic Minds.svg"
                 alt="Kaleidoscopic Minds"
-                className="h-13 w-auto"
+                className="h-16 w-auto"
               />
 
               <div className="leading-tight">
