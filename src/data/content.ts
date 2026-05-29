@@ -279,7 +279,7 @@ export const founder = {
     { value: "4", label: "Curriculums" },
     { value: "1:1", label: "Sessions" },
   ],
-  founderName: "Khadija Topiwala",
+  founderName: "Khadija A.",
   founderTitle: "Founder, Kaleidoscopic Minds",
   imageSrc:
     "https://res.cloudinary.com/dimqweehx/image/upload/v1780039357/WhatsApp_Image_2026-05-29_at_10.52.05_svfzfp.jpg",

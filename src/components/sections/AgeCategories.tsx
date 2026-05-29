@@ -51,7 +51,7 @@ export default function AgeCategories() {
             Find Your Perfect Path
           </h2>
           <p className="text-on-surface-variant font-body text-body-md mt-4 max-w-2xl mx-auto">
-            Structured learning programs tailored to every stage of academic
+            Structured learning programs tailored for every stage of academic
             development.
           </p>
         </div>
