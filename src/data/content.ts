@@ -402,13 +402,13 @@ export const footerLinks = {
   ],
   support: [
     { label: "Begin a Session", href: "/begin-session" },
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms of Service", href: "/terms-of-service" },
   ],
 };
 
 export const contactInfo = {
   email: "kaleidoscopicminds.kl@gmail.com",
-  phone: "+91 6268 300 535",
-  whatsapp: "916268300535",
+  phone: "+91 6267 000 755",
+  whatsapp: "916267000755",
 };
