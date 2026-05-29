@@ -12,12 +12,21 @@ export default function Navbar() {
     <header className="sticky top-0 w-full z-50 bg-surface/95 backdrop-blur-md shadow-sm border-b border-outline-variant/20">
       <nav className="flex justify-between items-center px-4 md:px-16 py-4 max-w-[1280px] mx-auto">
         {/* LOGO */}
-        <Link href="/" className="shrink-0 flex items-center">
+        <Link href="/" className="shrink-0 flex items-center gap-3">
           <img
             src="/Kaliedoscopic Minds.svg"
             alt="Kaleidoscopic Minds"
-            className="h-12 w-auto"
+            className="h-14 w-auto"
           />
+
+          <div className="leading-tight">
+            <div className="font-headline font-extrabold text-primary text-xl">
+              Kaleidoscopic
+            </div>
+            <div className="font-headline font-extrabold text-secondary text-xl -mt-1">
+              Minds
+            </div>
+          </div>
         </Link>
 
         {/* DESKTOP NAV */}
