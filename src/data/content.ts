@@ -266,7 +266,7 @@ export const founder = {
   founderName: "Khadija Topiwala",
   founderTitle: "Founder, Kaleidoscopic Minds",
   imageSrc:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuCCccehq32S2xTup5U47MSrwuZygTkvE-PdY_GSNLdcEvv4FBb45gNr04e-yMGG_pwzU_MyZCpfh6hyI2ECW9PoqrtmIjNLXMZ3x8ZkhpKDL2G73KF_vIIHmHzmrEfvpQNJ6wwryLnKMuKgQQcepBujy-V6lmv_EtzfPKSIQHUMMbYLHpJMLe9Aa8i3ZHk5ZAmFgXaG3aKxN5oIDU169kfqhYBBKvZN09oBwp_fd9rFb51LHqd_zXktFS-xAofv0fdvouYKW1B8FN8",
+    "https://res.cloudinary.com/dimqweehx/image/upload/v1780039357/WhatsApp_Image_2026-05-29_at_10.52.05_svfzfp.jpg",
 };
 
 export const faqItems = [
