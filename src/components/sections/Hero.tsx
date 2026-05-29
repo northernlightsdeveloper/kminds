@@ -16,7 +16,6 @@ export default function Hero() {
     { src: hero.heroVideoSrc, label: hero.videoLabel, icon: "videocam" },
   ];
 
-  // Play active video, pause others, reset mute on tab switch
   useEffect(() => {
     videos.forEach((_, i) => {
       const vid = videoRefs.current[i];
@@ -46,7 +45,6 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-surface geo-bg">
-      {/* Decorative geometric shapes */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-primary/5 -translate-y-1/3 translate-x-1/3 blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-secondary-container/20 translate-y-1/2 -translate-x-1/4 blur-3xl pointer-events-none" />
       <div className="absolute inset-0 dot-grid opacity-40 pointer-events-none" />
@@ -54,16 +52,18 @@ export default function Hero() {
       <div className="relative px-4 md:px-margin-desktop pt-20 pb-24 max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         {/* ── LEFT ──────────────────────────────────────────── */}
         <div className="animate-fade-up">
+          {/* Brand pill — text bumped up from text-label-md to text-sm */}
           <div className="inline-flex items-center gap-2 bg-primary-fixed border border-primary/20 px-4 py-2 rounded-full mb-8 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="font-headline text-label-md text-primary font-bold tracking-wide">
+            <span className="font-headline text-sm text-primary font-bold tracking-wide">
               {hero.brandName}
             </span>
           </div>
 
+          {/* Headline — clamp reduced from 2rem–3.5rem to 1.6rem–2.8rem */}
           <h1
             className="font-headline font-extrabold text-on-surface mb-5 leading-[1.1]"
-            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
+            style={{ fontSize: "clamp(1.6rem, 4vw, 2.8rem)" }}
           >
             {hero.tagline}
           </h1>
@@ -121,27 +121,13 @@ export default function Hero() {
 
         {/* ── RIGHT: Video Card ────────────────────────────── */}
         <div className="relative animate-scale-in delay-200">
-          {/* ── STAT CARD 1: 95% — top left ─────────────────
-              Starts as a small icon-only pill.
-              On hover it slides open to reveal the text.       */}
-          <div
-            className="
-              group absolute -left-6 top-8 z-10
-              bg-white border border-outline-variant/20 shadow-xl rounded-2xl
-              flex items-center overflow-hidden
-              animate-fade-up delay-300
-              transition-[width,padding] duration-300 ease-out
-              w-[52px] hover:w-[196px]
-              p-[6px] hover:px-4 hover:py-3
-            "
-          >
-            {/* Icon bubble — always visible */}
+          {/* Stat card 1 — 95% */}
+          <div className="group absolute -left-6 top-8 z-10 bg-white border border-outline-variant/20 shadow-xl rounded-2xl flex items-center overflow-hidden animate-fade-up delay-300 transition-[width,padding] duration-300 ease-out w-[52px] hover:w-[196px] p-[6px] hover:px-4 hover:py-3">
             <div className="w-10 h-10 bg-tertiary-fixed rounded-xl flex items-center justify-center flex-shrink-0">
               <span className="material-symbols-outlined text-tertiary text-xl">
                 trending_up
               </span>
             </div>
-            {/* Text — fades in as card expands */}
             <div className="ml-3 opacity-0 group-hover:opacity-100 transition-opacity duration-150 delay-150 whitespace-nowrap">
               <p className="font-headline text-headline-md text-on-surface leading-none">
                 95%
@@ -152,18 +138,8 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* ── STAT CARD 2: 4 Curriculums — bottom right ─── */}
-          <div
-            className="
-              group absolute -right-4 bottom-16 z-10
-              bg-white border border-outline-variant/20 shadow-xl rounded-2xl
-              flex items-center overflow-hidden
-              animate-fade-up delay-400
-              transition-[width,padding] duration-300 ease-out
-              w-[52px] hover:w-[172px]
-              p-[6px] hover:px-4 hover:py-3
-            "
-          >
+          {/* Stat card 2 — 4 Curriculums */}
+          <div className="group absolute -right-4 bottom-16 z-10 bg-white border border-outline-variant/20 shadow-xl rounded-2xl flex items-center overflow-hidden animate-fade-up delay-400 transition-[width,padding] duration-300 ease-out w-[52px] hover:w-[172px] p-[6px] hover:px-4 hover:py-3">
             <div className="w-10 h-10 bg-secondary-fixed rounded-xl flex items-center justify-center flex-shrink-0">
               <span className="material-symbols-outlined text-secondary text-xl">
                 school
@@ -181,7 +157,6 @@ export default function Hero() {
 
           {/* ── VIDEO CARD ── */}
           <div className="relative aspect-[4/3] rounded-[40px] overflow-hidden card-shadow border-4 border-white bg-black">
-            {/* Videos — stacked, only active is visible */}
             {videos.map((v, i) => (
               <video
                 key={i}
@@ -203,10 +178,8 @@ export default function Hero() {
               />
             ))}
 
-            {/* Gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
-            {/* ── TAB SWITCHER — compact pill ── */}
             {videos.length > 1 && (
               <div className="absolute top-3 left-1/2 -translate-x-1/2 flex items-center gap-1 bg-black/50 backdrop-blur-md p-1 rounded-full border border-white/15 z-10 w-max">
                 {videos.map((v, i) => (
@@ -231,7 +204,6 @@ export default function Hero() {
               </div>
             )}
 
-            {/* Bottom-left: active label badge */}
             <div className="absolute bottom-6 left-6 glass-card px-3 py-1.5 rounded-full flex items-center gap-2 shadow-sm z-10">
               <span className="w-2 h-2 bg-error rounded-full animate-pulse flex-shrink-0" />
               <span className="font-headline text-label-md text-on-surface truncate max-w-[140px] sm:max-w-none">
@@ -239,7 +211,6 @@ export default function Hero() {
               </span>
             </div>
 
-            {/* Bottom-right: mute + expand */}
             <div className="absolute bottom-5 right-5 flex items-center gap-2 z-10">
               <button
                 onClick={toggleMute}
@@ -264,7 +235,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ── LIGHTBOX OVERLAY ── */}
+      {/* ── LIGHTBOX ── */}
       {isExpanded && (
         <div
           className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 md:p-10"
@@ -296,7 +267,6 @@ export default function Hero() {
                 ))}
               </div>
             )}
-
             <video
               src={activeVideo.src}
               autoPlay
@@ -305,7 +275,6 @@ export default function Hero() {
               controls
               className="w-full h-auto block"
             />
-
             <button
               onClick={toggleExpand}
               aria-label="Close expanded video"
