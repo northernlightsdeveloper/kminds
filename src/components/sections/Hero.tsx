@@ -55,7 +55,7 @@ export default function Hero() {
           {/* Brand pill — text bumped up from text-label-md to text-sm */}
           <div className="inline-flex items-center gap-2 bg-primary-fixed border border-primary/20 px-4 py-2 rounded-full mb-8 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="font-headline text-sm text-primary font-bold tracking-wide">
+            <span className="font-headline text-lg text-primary font-bold tracking-wide">
               {hero.brandName}
             </span>
           </div>
