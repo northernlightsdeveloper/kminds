@@ -43,22 +43,22 @@ export const hero = {
   secondaryCta: { label: "Explore Programs", href: "/courses" },
 
   // ── VIDEOS ────────────────────────────────────────────────────────────────
-  // Add your second Cloudinary URL to heroVideos[1].src when ready.
   heroVideos: [
     {
       src: "https://res.cloudinary.com/dimqweehx/video/upload/v1780045098/WhatsApp_Video_2026-05-29_at_14.19.12_zcdou3.mp4",
-      label: "Sample Class Recording",
+      label: "Live Class",
+      icon: "cast_for_education",
     },
     {
-      // Replace this URL with your second Cloudinary video URL
+      // Replace with your second Cloudinary video URL
       src: "https://res.cloudinary.com/dimqweehx/video/upload/v1780045509/Screen_Recording_2026-03-11_141436_zr8qed.mp4",
-      label: "Student Session",
+      label: "Real Results",
+      icon: "emoji_events",
     },
   ],
-  // Keep the old field as a fallback (optional — can remove once videos array is live)
   heroVideoSrc:
     "https://res.cloudinary.com/dimqweehx/video/upload/v1780045098/WhatsApp_Video_2026-05-29_at_14.19.12_zcdou3.mp4",
-  videoLabel: "Sample Class Recording",
+  videoLabel: "Live Class",
 };
 
 export const testimonialsSection = {
