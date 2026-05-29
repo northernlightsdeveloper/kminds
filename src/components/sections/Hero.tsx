@@ -6,30 +6,43 @@ import { useEffect, useRef, useState } from "react";
 import { hero } from "@/data/content";
 
 export default function Hero() {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [activeTab, setActiveTab] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // Fallback: force play on mount (handles browsers that need a nudge)
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  const videos = hero.heroVideos ?? [
+    { src: hero.heroVideoSrc, label: hero.videoLabel },
+  ];
+
+  // Autoplay the active video on mount + whenever tab changes
   useEffect(() => {
-    const vid = videoRef.current;
-    if (!vid) return;
-    vid.muted = true;
-    vid.play().catch(() => {
-      // Autoplay blocked — video stays paused until user interaction
+    videos.forEach((_, i) => {
+      const vid = videoRefs.current[i];
+      if (!vid) return;
+      vid.muted = true;
+      if (i === activeTab) {
+        vid.play().catch(() => {});
+      } else {
+        vid.pause();
+        vid.currentTime = 0;
+      }
     });
-  }, []);
+    setIsMuted(true);
+  }, [activeTab]);
 
   const toggleMute = () => {
-    const vid = videoRef.current;
+    const vid = videoRefs.current[activeTab];
     if (!vid) return;
     vid.muted = !vid.muted;
     setIsMuted(vid.muted);
-    // If user unmutes, ensure it's playing
     if (!vid.muted && vid.paused) vid.play();
   };
 
   const toggleExpand = () => setIsExpanded((prev) => !prev);
+
+  const activeVideo = videos[activeTab];
 
   return (
     <section className="relative overflow-hidden bg-surface geo-bg">
@@ -58,7 +71,7 @@ export default function Hero() {
             {hero.tagline}
           </h1>
 
-          {/* Sub tagline with colored words */}
+          {/* Sub tagline */}
           <div className="flex items-center gap-3 mb-3">
             <div className="h-px flex-1 bg-gradient-to-r from-primary/30 to-transparent" />
             <p className="font-headline text-label-md text-primary uppercase tracking-widest">
@@ -149,29 +162,61 @@ export default function Hero() {
 
           {/* ── VIDEO CARD ── */}
           <div className="relative aspect-[4/3] rounded-[40px] overflow-hidden card-shadow border-4 border-white">
-            <video
-              ref={videoRef}
-              src={hero.heroVideoSrc}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
-            {/* Bottom-left: live badge */}
-            <div className="absolute bottom-6 left-6 glass-card px-4 py-2 rounded-full flex items-center gap-2 shadow-sm">
+            {/* Render both videos, only show the active one */}
+            {videos.map((v, i) => (
+              <video
+                key={i}
+                ref={(el) => { videoRefs.current[i] = el; }}
+                src={v.src}
+                autoPlay={i === 0}
+                muted
+                loop
+                playsInline
+                className={[
+                  "absolute inset-0 w-full h-full object-cover transition-opacity duration-500",
+                  i === activeTab ? "opacity-100" : "opacity-0 pointer-events-none",
+                ].join(" ")}
+              />
+            ))}
+
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+
+            {/* ── TAB SWITCHER — top of card ── */}
+            {videos.length > 1 && (
+              <div className="absolute top-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2 py-1.5 rounded-full border border-white/15 z-10">
+                {videos.map((v, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveTab(i)}
+                    aria-label={`Switch to ${v.label}`}
+                    className={[
+                      "flex items-center gap-1.5 px-3 py-1 rounded-full font-headline text-xs transition-all duration-200",
+                      i === activeTab
+                        ? "bg-white text-on-surface shadow-sm"
+                        : "text-white/80 hover:text-white hover:bg-white/10",
+                    ].join(" ")}
+                  >
+                    <span className="material-symbols-outlined text-[14px]">
+                      {i === activeTab ? "play_circle" : "videocam"}
+                    </span>
+                    {v.label}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Bottom-left: active label badge */}
+            <div className="absolute bottom-6 left-6 glass-card px-4 py-2 rounded-full flex items-center gap-2 shadow-sm z-10">
               <span className="w-2.5 h-2.5 bg-error rounded-full animate-pulse" />
               <span className="font-headline text-label-md text-on-surface">
-                {hero.videoLabel}
+                {activeVideo.label}
               </span>
             </div>
 
-            {/* Bottom-right: control buttons */}
+            {/* Bottom-right: mute + expand controls */}
             <div className="absolute bottom-5 right-5 flex items-center gap-2 z-10">
-              {/* Mute / Unmute */}
               <button
                 onClick={toggleMute}
                 aria-label={isMuted ? "Unmute video" : "Mute video"}
@@ -181,15 +226,13 @@ export default function Hero() {
                   {isMuted ? "volume_off" : "volume_up"}
                 </span>
               </button>
-
-              {/* Expand / Fullscreen */}
               <button
                 onClick={toggleExpand}
                 aria-label="Expand video"
                 className="w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-colors border border-white/20"
               >
                 <span className="material-symbols-outlined text-[18px]">
-                  {isExpanded ? "close_fullscreen" : "open_in_full"}
+                  open_in_full
                 </span>
               </button>
             </div>
@@ -207,14 +250,38 @@ export default function Hero() {
             className="relative w-full max-w-4xl rounded-3xl overflow-hidden shadow-2xl border-2 border-white/10"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Tab bar inside lightbox */}
+            {videos.length > 1 && (
+              <div className="absolute top-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-black/50 backdrop-blur-md px-2 py-1.5 rounded-full border border-white/15 z-10">
+                {videos.map((v, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveTab(i)}
+                    className={[
+                      "flex items-center gap-1.5 px-3 py-1 rounded-full font-headline text-xs transition-all duration-200",
+                      i === activeTab
+                        ? "bg-white text-on-surface shadow-sm"
+                        : "text-white/80 hover:text-white hover:bg-white/10",
+                    ].join(" ")}
+                  >
+                    <span className="material-symbols-outlined text-[14px]">
+                      {i === activeTab ? "play_circle" : "videocam"}
+                    </span>
+                    {v.label}
+                  </button>
+                ))}
+              </div>
+            )}
+
             <video
-              src={hero.heroVideoSrc}
+              src={activeVideo.src}
               autoPlay
               loop
               playsInline
               controls
               className="w-full h-auto block"
             />
+
             {/* Close button */}
             <button
               onClick={toggleExpand}

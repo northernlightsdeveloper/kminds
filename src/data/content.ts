@@ -32,6 +32,8 @@ export const navLinks = [
   { label: "About Us", href: "/#about", dropdown: [] },
 ];
 
+// ── REPLACE the `hero` export in src/data/content.ts with this ──
+
 export const hero = {
   brandName: "Kaleidoscopic Minds",
   tagline: "Where Potential Becomes Performance",
@@ -39,11 +41,23 @@ export const hero = {
   body: "A structured learning experience designed for students who aim higher.",
   primaryCta: { label: "Begin a Personalised Session", href: "/begin-session" },
   secondaryCta: { label: "Explore Programs", href: "/courses" },
-  // ── VIDEO URL ─────────────────────────────────────────────
-  // Replace with your Cloudinary video URL ending in .mp4
-  // Get it from: Cloudinary → Media Library → click video → copy URL
+
+  // ── VIDEOS ────────────────────────────────────────────────────────────────
+  // Add your second Cloudinary URL to heroVideos[1].src when ready.
+  heroVideos: [
+    {
+      src: "https://res.cloudinary.com/dimqweehx/video/upload/v1780045098/WhatsApp_Video_2026-05-29_at_14.19.12_zcdou3.mp4",
+      label: "Sample Class Recording",
+    },
+    {
+      // Replace this URL with your second Cloudinary video URL
+      src: "https://res.cloudinary.com/dimqweehx/video/upload/v1780045509/Screen_Recording_2026-03-11_141436_zr8qed.mp4",
+      label: "Student Session",
+    },
+  ],
+  // Keep the old field as a fallback (optional — can remove once videos array is live)
   heroVideoSrc:
-    "https://res.cloudinary.com/dimqweehx/video/upload/v1780045509/Screen_Recording_2026-03-11_141436_zr8qed.mp4",
+    "https://res.cloudinary.com/dimqweehx/video/upload/v1780045098/WhatsApp_Video_2026-05-29_at_14.19.12_zcdou3.mp4",
   videoLabel: "Sample Class Recording",
 };
 
