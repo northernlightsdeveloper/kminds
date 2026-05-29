@@ -20,6 +20,14 @@ export const metadata: Metadata = {
   title: "Kaleidoscopic Minds | Learn Differently. Think Boldly.",
   description:
     "Kaleidoscopic Minds offers personalised, curriculum-aligned education for Australian students from Prep to Year 12 — where imagination meets excellence.",
+
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
