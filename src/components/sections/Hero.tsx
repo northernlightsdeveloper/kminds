@@ -1,8 +1,36 @@
 // src/components/sections/Hero.tsx
+"use client";
+
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { hero } from "@/data/content";
 
 export default function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMuted, setIsMuted] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  // Fallback: force play on mount (handles browsers that need a nudge)
+  useEffect(() => {
+    const vid = videoRef.current;
+    if (!vid) return;
+    vid.muted = true;
+    vid.play().catch(() => {
+      // Autoplay blocked — video stays paused until user interaction
+    });
+  }, []);
+
+  const toggleMute = () => {
+    const vid = videoRef.current;
+    if (!vid) return;
+    vid.muted = !vid.muted;
+    setIsMuted(vid.muted);
+    // If user unmutes, ensure it's playing
+    if (!vid.muted && vid.paused) vid.play();
+  };
+
+  const toggleExpand = () => setIsExpanded((prev) => !prev);
+
   return (
     <section className="relative overflow-hidden bg-surface geo-bg">
       {/* Decorative geometric shapes */}
@@ -119,9 +147,10 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* ── VIDEO — autoplays muted, loops silently ── */}
+          {/* ── VIDEO CARD ── */}
           <div className="relative aspect-[4/3] rounded-[40px] overflow-hidden card-shadow border-4 border-white">
             <video
+              ref={videoRef}
               src={hero.heroVideoSrc}
               autoPlay
               muted
@@ -129,18 +158,74 @@ export default function Hero() {
               playsInline
               className="absolute inset-0 w-full h-full object-cover"
             />
-            {/* Gradient overlay so badge stays readable */}
+            {/* Gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-            {/* Live badge */}
+
+            {/* Bottom-left: live badge */}
             <div className="absolute bottom-6 left-6 glass-card px-4 py-2 rounded-full flex items-center gap-2 shadow-sm">
               <span className="w-2.5 h-2.5 bg-error rounded-full animate-pulse" />
               <span className="font-headline text-label-md text-on-surface">
                 {hero.videoLabel}
               </span>
             </div>
+
+            {/* Bottom-right: control buttons */}
+            <div className="absolute bottom-5 right-5 flex items-center gap-2 z-10">
+              {/* Mute / Unmute */}
+              <button
+                onClick={toggleMute}
+                aria-label={isMuted ? "Unmute video" : "Mute video"}
+                className="w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-colors border border-white/20"
+              >
+                <span className="material-symbols-outlined text-[18px]">
+                  {isMuted ? "volume_off" : "volume_up"}
+                </span>
+              </button>
+
+              {/* Expand / Fullscreen */}
+              <button
+                onClick={toggleExpand}
+                aria-label="Expand video"
+                className="w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-colors border border-white/20"
+              >
+                <span className="material-symbols-outlined text-[18px]">
+                  {isExpanded ? "close_fullscreen" : "open_in_full"}
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* ── EXPANDED / LIGHTBOX OVERLAY ── */}
+      {isExpanded && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 md:p-10"
+          onClick={toggleExpand}
+        >
+          <div
+            className="relative w-full max-w-4xl rounded-3xl overflow-hidden shadow-2xl border-2 border-white/10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <video
+              src={hero.heroVideoSrc}
+              autoPlay
+              loop
+              playsInline
+              controls
+              className="w-full h-auto block"
+            />
+            {/* Close button */}
+            <button
+              onClick={toggleExpand}
+              aria-label="Close expanded video"
+              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/80 transition-colors border border-white/20"
+            >
+              <span className="material-symbols-outlined text-xl">close</span>
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
