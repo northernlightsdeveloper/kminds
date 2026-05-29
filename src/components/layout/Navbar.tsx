@@ -2,7 +2,6 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { navLinks } from "@/data/content";
 
 export default function Navbar() {
@@ -14,14 +13,11 @@ export default function Navbar() {
       <nav className="flex justify-between items-center px-4 md:px-16 py-4 max-w-[1280px] mx-auto">
         {/* LOGO */}
         <Link href="/" className="shrink-0">
-          <Image
-            src="/Kaliedoscopic_Minds.png"
-            alt="Kaleidoscopic Minds"
-            width={200}
-            height={200}
-            className="object-contain w-16 h-16"
-            priority
-          />
+          <span className="font-headline font-extrabold text-primary leading-tight text-base block">
+            Kaleidoscopic
+            <br />
+            <span className="text-secondary">Minds</span>
+          </span>
         </Link>
 
         {/* DESKTOP NAV */}
