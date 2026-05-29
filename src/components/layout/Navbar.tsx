@@ -17,9 +17,9 @@ export default function Navbar() {
           <Image
             src="/Kaliedoscopic_Minds.png"
             alt="Kaleidoscopic Minds"
-            width={56}
-            height={56}
-            className="object-contain"
+            width={200}
+            height={200}
+            className="object-contain w-16 h-16"
             priority
           />
         </Link>
