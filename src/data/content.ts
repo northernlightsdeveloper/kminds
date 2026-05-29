@@ -3,20 +3,20 @@
 export const navLinks = [
   {
     label: "Why KMinds",
-    href: "#why-kminds",
+    href: "/#why-kminds",
     dropdown: [
       { label: "Customised Learning", href: "/customised-learning" },
-      { label: "Reviews", href: "#testimonials" },
+      { label: "Reviews", href: "/#testimonials" },
     ],
   },
   {
     label: "Curriculums",
-    href: "#curriculum",
+    href: "/#curriculum",
     dropdown: [
-      { label: "Australian Curriculum (AC)", href: "#curriculum" },
-      { label: "Victorian Curriculum (VC)", href: "#curriculum" },
-      { label: "IGCSE", href: "#curriculum" },
-      { label: "IB", href: "#curriculum" },
+      { label: "Australian Curriculum (AC)", href: "/#curriculum" },
+      { label: "Victorian Curriculum (VC)", href: "/#curriculum" },
+      { label: "IGCSE", href: "/#curriculum" },
+      { label: "IB", href: "/#curriculum" },
     ],
   },
   {
@@ -28,8 +28,8 @@ export const navLinks = [
       { label: "Years 11–12", href: "/courses" },
     ],
   },
-  { label: "FAQs", href: "#faq", dropdown: [] },
-  { label: "About Us", href: "#about", dropdown: [] },
+  { label: "FAQs", href: "/#faq", dropdown: [] },
+  { label: "About Us", href: "/#about", dropdown: [] },
 ];
 
 export const hero = {
@@ -48,7 +48,6 @@ export const testimonialsSection = {
   headline: "Trusted by Parents. Valued by Students.",
 };
 
-// Real testimonials from actual reviews
 export const testimonials = [
   {
     id: 1,
@@ -88,16 +87,6 @@ export const testimonials = [
       "I just wanted to say that I finished my bio exam and it went quite well — it was easier than I expected, which was a nice surprise. Once again thank you so much for being such a great teacher. I really enjoyed being your student!",
     stars: 5,
     avatarColor: "bg-primary-fixed",
-    variant: "light" as const,
-  },
-  {
-    id: 5,
-    name: "Mrs. Anita Sharma",
-    role: "Parent of Year 9 Student",
-    quote:
-      "K-Minds has been a turning point for my son. The one-on-one attention and structured approach made a huge difference — he went from dreading exams to feeling genuinely prepared and confident.",
-    stars: 5,
-    avatarColor: "bg-tertiary-fixed-dim",
     variant: "light" as const,
   },
 ];
@@ -405,21 +394,21 @@ export const faqItems = [
 
 export const footerLinks = {
   explore: [
-    { label: "Why KMinds", href: "#why-kminds" },
+    { label: "Why KMinds", href: "/#why-kminds" },
     { label: "Customised Learning", href: "/customised-learning" },
     { label: "Programs", href: "/courses" },
-    { label: "Curriculums", href: "#curriculum" },
-    { label: "FAQs", href: "#faq" },
+    { label: "Curriculums", href: "/#curriculum" },
+    { label: "FAQs", href: "/#faq" },
   ],
   support: [
     { label: "Begin a Session", href: "/begin-session" },
-    { label: "Privacy Policy", href: "/privacy-policy" },
-    { label: "Terms of Service", href: "/terms-of-service" },
+    { label: "Privacy Policy", href: "#" },
+    { label: "Terms of Service", href: "#" },
   ],
 };
 
 export const contactInfo = {
   email: "kaleidoscopicminds.kl@gmail.com",
-  phone: "+91 6267 000 755",
-  whatsapp: "916267000755",
+  phone: "+91 6268 300 535",
+  whatsapp: "916268300535",
 };
