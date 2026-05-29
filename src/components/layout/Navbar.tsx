@@ -2,6 +2,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { navLinks } from "@/data/content";
 
 export default function Navbar() {
@@ -13,11 +14,14 @@ export default function Navbar() {
       <nav className="flex justify-between items-center px-4 md:px-16 py-4 max-w-[1280px] mx-auto">
         {/* LOGO */}
         <Link href="/" className="shrink-0">
-          <span className="font-headline font-extrabold text-primary leading-tight text-base block">
-            Kaleidoscopic
-            <br />
-            <span className="text-secondary">Minds</span>
-          </span>
+          <Image
+            src="/Kaliedoscopic_Minds.png"
+            alt="Kaleidoscopic Minds"
+            width={56}
+            height={56}
+            className="object-contain"
+            priority
+          />
         </Link>
 
         {/* DESKTOP NAV */}
@@ -45,7 +49,6 @@ export default function Navbar() {
                 )}
               </Link>
 
-              {/* Dropdown — pt-2 bridges the gap so it doesn't disappear */}
               {link.dropdown.length > 0 && openDropdown === link.label && (
                 <div className="absolute top-full left-0 pt-2 z-50 min-w-[220px]">
                   <div className="bg-white rounded-2xl shadow-xl border border-outline-variant/20 py-2 overflow-hidden">
@@ -65,7 +68,7 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* CTA button only — Sign In removed */}
+        {/* CTA button */}
         <Link
           href="/begin-session"
           className="hidden md:block bg-primary text-on-primary px-5 py-2.5 rounded-full font-headline text-label-md border-b-4 border-[#3435b0] btn-3d shrink-0 whitespace-nowrap"
