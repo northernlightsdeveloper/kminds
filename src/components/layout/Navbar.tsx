@@ -10,26 +10,28 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 w-full z-50 bg-surface/95 backdrop-blur-md shadow-sm border-b border-outline-variant/20">
-      <nav className="flex justify-between items-center px-4 md:px-16 py-4 max-w-[1280px] mx-auto">
-        {/* LOGO */}
-        <Link href="/" className="shrink-0 flex items-center gap-3">
+      <nav className="flex justify-between items-center px-4 md:px-16 py-3 max-w-[1280px] mx-auto">
+        {/* ── LOGO ──────────────────────────────────────────── */}
+        <Link href="/" className="shrink-0 flex items-center gap-2.5">
+          {/* SVG logo from public folder */}
           <img
             src="/Kaliedoscopic Minds.svg"
-            alt="Kaleidoscopic Minds"
-            className="h-14 w-auto"
+            alt="Kaleidoscopic Minds logo"
+            className="h-12 w-auto"
           />
-
-          <div className="leading-tight">
-            <div className="font-headline font-extrabold text-primary text-xl">
+          {/* Brand name text beside logo */}
+          <div className="leading-tight hidden sm:block">
+            <div className="font-headline font-extrabold text-primary text-lg leading-none">
               Kaleidoscopic
             </div>
-            <div className="font-headline font-extrabold text-secondary text-xl -mt-1">
+            {/* 'Minds' in near-black — not secondary amber */}
+            <div className="font-headline font-extrabold text-[#1a1a2e] text-lg leading-none mt-0.5">
               Minds
             </div>
           </div>
         </Link>
 
-        {/* DESKTOP NAV */}
+        {/* ── DESKTOP NAV ─────────────────────────────────── */}
         <div className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
             <div
@@ -54,6 +56,7 @@ export default function Navbar() {
                 )}
               </Link>
 
+              {/* Dropdown — pt-2 bridges the gap so it doesn't disappear */}
               {link.dropdown.length > 0 && openDropdown === link.label && (
                 <div className="absolute top-full left-0 pt-2 z-50 min-w-[220px]">
                   <div className="bg-white rounded-2xl shadow-xl border border-outline-variant/20 py-2 overflow-hidden">
@@ -73,7 +76,7 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* CTA button */}
+        {/* ── CTA BUTTON ──────────────────────────────────── */}
         <Link
           href="/begin-session"
           className="hidden md:block bg-primary text-on-primary px-5 py-2.5 rounded-full font-headline text-label-md border-b-4 border-[#3435b0] btn-3d shrink-0 whitespace-nowrap"
@@ -81,7 +84,7 @@ export default function Navbar() {
           Begin a Session
         </Link>
 
-        {/* MOBILE HAMBURGER */}
+        {/* ── MOBILE HAMBURGER ────────────────────────────── */}
         <button
           className="md:hidden text-on-surface"
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -93,7 +96,7 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* MOBILE MENU */}
+      {/* ── MOBILE MENU ─────────────────────────────────── */}
       {mobileOpen && (
         <div className="md:hidden bg-surface border-t border-outline-variant/20 px-6 py-4 flex flex-col gap-1 max-h-[80vh] overflow-y-auto">
           {navLinks.map((link) => (

@@ -103,7 +103,7 @@
     background: transparent;
   }
 
-  /* Animate on scroll — add class via JS or just use CSS animation-delay */
+  /* Animate on scroll â€” add class via JS or just use CSS animation-delay */
   @keyframes fadeUp {
     from {
       opacity: 0;
@@ -157,4 +157,22 @@
     animation-delay: 0.4s;
     opacity: 0;
   }
+}
+
+/* â”€â”€ TICKER ANIMATION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   Used in Hero pill â€” scrolls through messages vertically.
+   Duration = number of messages Ã— seconds per message.
+   5 messages Ã— 2.5s = 12.5s total (then seamlessly loops).
+   To adjust speed: change the duration value below.
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€*/
+@keyframes ticker {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+.animate-ticker {
+  animation: ticker 12.5s linear infinite;
 }
