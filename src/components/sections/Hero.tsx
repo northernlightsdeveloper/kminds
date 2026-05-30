@@ -5,11 +5,11 @@ import { hero } from "@/data/content";
 
 // Animated pill messages — cycles through these instead of just showing brand name
 const pillMessages = [
-  "✦ Now Enrolling for 2025",
-  "✦ Free Consultation Available",
-  "✦ Years 5–12 · Maths & Science",
-  "✦ Live 1-on-1 Online Sessions",
-  "✦ AC · VC · IGCSE · IB",
+  "Now Enrolling for 2025",
+  "Free Consultation Available",
+  "Years 5–12 · Maths & Science",
+  "Live 1-on-1 Online Sessions",
+  "AC · VC · IGCSE · IB",
 ];
 
 export default function Hero() {
