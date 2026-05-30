@@ -25,7 +25,7 @@ export default function Navbar() {
               Kaleidoscopic
             </div>
             {/* 'Minds' in near-black — not secondary amber */}
-            <div className="font-headline font-extrabold text-[#1a1a2e] text-lg leading-none mt-0.5">
+            <div className="font-headline font-extrabold text-[#101C2D] text-lg leading-none mt-0.5">
               Minds
             </div>
           </div>
