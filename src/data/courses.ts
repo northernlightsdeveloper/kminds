@@ -1,6 +1,6 @@
 // src/data/courses.ts — Real course content for KMinds
 
-export type CourseLevel = "Early" | "Primary" | "Secondary" | "Senior";
+export type CourseLevel = "Years 5–7" | "Years 8–10" | "Years 11–12";
 export type CourseSubject = "Maths" | "Science";
 
 export interface Course {
@@ -26,7 +26,7 @@ export const courses: Course[] = [
     tagline: "Building Strong Foundations",
     description:
       "A structured introduction to core mathematical concepts, designed to build confidence and clarity from the ground up.",
-    level: "Early",
+    level: "Years 5–7",
     yearRange: "Years 5–7",
     topics: [
       "Number sense & arithmetic",
@@ -45,7 +45,7 @@ export const courses: Course[] = [
     tagline: "Strengthening Concepts & Application",
     description:
       "Moving beyond the basics, students develop analytical thinking and problem-solving skills across key mathematical domains.",
-    level: "Primary",
+    level: "Years 8–10",
     yearRange: "Years 8–10",
     topics: [
       "Algebra, equations & trigonometry",
@@ -64,7 +64,7 @@ export const courses: Course[] = [
     tagline: "Advanced Mathematics & Precision",
     description:
       "Rigorous, exam-focused senior mathematics preparation with expert guidance on the most challenging topics.",
-    level: "Secondary",
+    level: "Years 11–12",
     yearRange: "Years 11–12",
     topics: [
       "Functions, calculus & advanced algebra",
@@ -83,7 +83,7 @@ export const courses: Course[] = [
     tagline: "Exploring Scientific Foundations",
     description:
       "Science begins with curiosity. Students explore fundamental concepts across physics, chemistry, and biology through clear, structured sessions.",
-    level: "Early",
+    level: "Years 5–7",
     yearRange: "Years 5–7",
     topics: [
       "Basics of physics, chemistry & biology",
@@ -102,7 +102,7 @@ export const courses: Course[] = [
     tagline: "Concept Development & Application",
     description:
       "A comprehensive deep-dive into secondary science, building strong conceptual understanding across all three core disciplines.",
-    level: "Primary",
+    level: "Years 8–10",
     yearRange: "Years 8–10",
     topics: [
       "Physics — motion, energy, electricity",
@@ -121,7 +121,7 @@ export const courses: Course[] = [
     tagline: "Advanced Science & Mastery",
     description:
       "Senior science preparation with a focus on analytical thinking, application-based learning, and exam readiness across advanced topics.",
-    level: "Secondary",
+    level: "Years 11–12",
     yearRange: "Years 11–12",
     topics: [
       "Subject-focused advanced topics",
@@ -137,9 +137,9 @@ export const courses: Course[] = [
 
 export const levelFilters: ("All" | CourseLevel)[] = [
   "All",
-  "Early",
-  "Primary",
-  "Secondary",
+  "Years 5–7",
+  "Years 8–10",
+  "Years 11–12",
 ];
 export const subjectFilters: ("All" | CourseSubject)[] = [
   "All",
