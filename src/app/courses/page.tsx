@@ -36,7 +36,7 @@ export default function CoursesPage() {
 
   const filtered = courses.filter(
     (c) =>
-      (activeLevel === "All" || c.level === activeLevel) &&
+      (activeLevel === "All" || c.level === (activeLevel as string)) &&
       (activeSubject === "All" || c.subject === activeSubject),
   );
 
