@@ -20,7 +20,7 @@ export default function Navbar() {
             className="h-12 w-auto"
           />
           {/* Brand name text beside logo */}
-          <div className="leading-tight hidden sm:block">
+          <div className="leading-tight ">
             <div className="font-headline font-extrabold text-primary text-lg leading-none">
               Kaleidoscopic
             </div>
