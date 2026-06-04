@@ -3,6 +3,36 @@
 
 import Link from "next/link";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Customised Learning | Personalised Online Tutoring | KMinds",
+  description:
+    "At KMinds, every learning plan is built around your child — their curriculum, pace, and gaps. Live face-to-face sessions, structured practice, and parent progress reports.",
+  alternates: { canonical: "/customised-learning" },
+  openGraph: {
+    title: "Customised Learning at Kaleidoscopic Minds",
+    description:
+      "Every mind is different. Every path should be too. KMinds builds a personalised academic system around each student.",
+    url: "https://www.k-minds.com/customised-learning",
+    images: [
+      {
+        url: "/og-customised.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Customised Learning - KMinds",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Customised Learning at Kaleidoscopic Minds",
+    description:
+      "Personalised sessions, structured practice, progress tracking & flexible scheduling. Built around your child.",
+    images: ["/og-customised.jpg"],
+  },
+};
+
 const sections = [
   {
     emoji: "🎯",

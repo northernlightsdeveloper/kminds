@@ -39,14 +39,23 @@ export const metadata: Metadata = {
     siteName: "Kaleidoscopic Minds",
     locale: "en_AU",
     type: "website",
+    images: [
+      {
+        url: "/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Kaleidoscopic Minds - Personalised Online Tutoring",
+      },
+    ],
   },
 
   // ── Twitter / X card ──────────────────────────────────────
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Kaleidoscopic Minds | Online Tutoring",
     description:
       "Personalised 1-on-1 tutoring for Australian students. Years 5–12. AC, VC, IGCSE & IB.",
+    images: ["/og-default.jpg"],
   },
 
   // ── Favicons ──────────────────────────────────────────────

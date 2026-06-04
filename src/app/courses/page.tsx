@@ -8,6 +8,36 @@ import {
   deliveryFeatures,
 } from "@/data/courses";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Our Programs | Maths & Science Courses for Years 5–12 | KMinds",
+  description:
+    "Explore KMinds programs: Number Explorers (Yrs 5–7), Logic Builders (Yrs 8–10), Problem Masters (Yrs 11–12), and Idea Explorers Science. Find the perfect course for your child.",
+  alternates: { canonical: "/courses" },
+  openGraph: {
+    title: "Find Your Perfect Course | KMinds Programs",
+    description:
+      "Every KMinds course blends live sessions, expert materials, and on-demand recordings. Maths & Science for Years 5–12.",
+    url: "https://www.k-minds.com/courses",
+    images: [
+      {
+        url: "/og-courses.jpg",
+        width: 1200,
+        height: 630,
+        alt: "KMinds Course Programs",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Find Your Perfect Course | KMinds Programs",
+    description:
+      "Live sessions, expert slide decks, practice quizzes & direct mentor access. Browse all Maths & Science courses.",
+    images: ["/og-courses.jpg"],
+  },
+};
+
 type ActiveLevel = "All" | "Years 5–7" | "Years 8–10" | "Years 11–12";
 type ActiveSubject = "All" | "Maths" | "Science";
 
