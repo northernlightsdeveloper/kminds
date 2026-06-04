@@ -15,6 +15,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   // ── SEO ───────────────────────────────────────────────────
@@ -116,6 +117,7 @@ export default function RootLayout({
         <Footer />
         {/* Floating WhatsApp button — appears on every page */}
         <WhatsAppButton />
+        <GoogleAnalytics gaId="G-Z9G18XWYF0" />
       </body>
     </html>
   );
