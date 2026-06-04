@@ -438,4 +438,5 @@ export const contactInfo = {
   email: "kaleidoscopicminds.kl@gmail.com",
   phone: "+91 6267 000 755",
   whatsapp: "916267000755",
+  instagram: "https://www.instagram.com/kaleidoscopic_minds_/",
 };
