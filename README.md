@@ -1,24 +1,48 @@
 # Kaleidoscopic Minds — KMinds Website
 
-Built with **Next.js 16**, **TypeScript**, and **Tailwind CSS**. Deployed free on **Vercel**.
+Official website for **Kaleidoscopic Minds**, a structured online tutoring platform for Australian students (Years 5–12) in Mathematics and Science.
 
-Live site: [kminds.vercel.app](https://kminds.vercel.app)
+🌐 **Live:** [kminds.vercel.app](https://kminds.vercel.app)
+
+---
+
+## Tech Stack
+
+| Tool                    | Purpose                                            |
+| ----------------------- | -------------------------------------------------- |
+| Next.js 16 (App Router) | React framework                                    |
+| TypeScript              | Type safety                                        |
+| Tailwind CSS            | Utility-first styling                              |
+| Vercel                  | Hosting + auto-deploy                              |
+| Formspree               | Form submissions to email                          |
+| Cloudinary              | Image + video hosting                              |
+| Google Fonts            | Plus Jakarta Sans + Nunito Sans + Material Symbols |
 
 ---
 
 ## Quick Start
 
 ```bash
+# Navigate to project
 cd Desktop/kminds
-npm install          # first time only
-npm run dev          # starts at http://localhost:3000
+
+# Install dependencies (first time only)
+npm install
+
+# Start local dev server
+npm run dev
+# Opens at http://localhost:3000
 ```
 
-To deploy — just push to GitHub. Vercel auto-deploys on every push.
+---
+
+## Deploy
+
+Every push to `main` auto-deploys via Vercel.
 
 ```bash
 git add .
-git commit -m "your message"
+git commit -m "your change description"
 git push origin main
 ```
 
@@ -29,78 +53,95 @@ git push origin main
 ```
 kminds/
 │
-├── public/                          ← Static files (images, icons)
-│   └── founder.jpg                  ← Founder photo (replace this)
+├── public/                              ← Static assets served at root URL
+│   ├── Kaliedoscopic Minds.svg          ← Logo (used in Navbar + Footer)
+│   └── founder.jpg                      ← Founder photo (or Cloudinary URL)
 │
 ├── src/
-│   ├── app/                         ← Pages (Next.js App Router)
-│   │   ├── layout.tsx               ← Root layout — Navbar + Footer on every page
-│   │   ├── page.tsx                 ← Homepage (/)
-│   │   ├── globals.css              ← Global styles + design utilities
+│   ├── app/                             ← Pages (Next.js App Router)
+│   │   ├── layout.tsx                   ← Root layout — Navbar + Footer on every page
+│   │   ├── page.tsx                     ← Homepage (/)
+│   │   ├── globals.css                  ← Global styles, animations, design utilities
+│   │   ├── not-found.tsx                ← 404 page
+│   │   ├── robots.ts                    ← robots.txt (SEO)
+│   │   ├── sitemap.ts                   ← sitemap.xml (SEO)
 │   │   │
-│   │   ├── begin-session/           ← /begin-session — Registration form
+│   │   ├── begin-session/               ← /begin-session — Registration form
 │   │   │   └── page.tsx
-│   │   ├── thank-you/               ← /thank-you — After form submission
+│   │   ├── courses/                     ← /courses — Programs page
 │   │   │   └── page.tsx
-│   │   ├── courses/                 ← /courses — All programs
+│   │   ├── customised-learning/         ← /customised-learning — Our approach
 │   │   │   └── page.tsx
-│   │   ├── customised-learning/     ← /customised-learning — Approach page
+│   │   ├── thank-you/                   ← /thank-you — Post form submission
 │   │   │   └── page.tsx
-│   │   ├── privacy-policy/          ← /privacy-policy
+│   │   ├── privacy-policy/              ← /privacy-policy
 │   │   │   └── page.tsx
-│   │   └── terms-of-service/        ← /terms-of-service
+│   │   └── terms-of-service/            ← /terms-of-service
 │   │       └── page.tsx
 │   │
 │   ├── components/
 │   │   ├── layout/
-│   │   │   ├── Navbar.tsx           ← Top navigation bar
-│   │   │   └── Footer.tsx           ← Site footer
+│   │   │   ├── Navbar.tsx               ← Sticky top nav with dropdowns
+│   │   │   └── Footer.tsx               ← Site footer with Instagram + WhatsApp
 │   │   │
-│   │   ├── sections/                ← Each homepage section
-│   │   │   ├── Hero.tsx             ← Hero banner
-│   │   │   ├── WhyKminds.tsx        ← Why KMinds features
-│   │   │   ├── Testimonials.tsx     ← Reviews / community
-│   │   │   ├── Curriculums.tsx      ← AC, VC, IGCSE, IB
-│   │   │   ├── AgeCategories.tsx    ← Years 5-7, 8-10, 11-12
-│   │   │   ├── Founder.tsx          ← About / founder section
-│   │   │   └── FAQ.tsx              ← FAQ accordion
+│   │   ├── sections/                    ← Homepage sections (one file each)
+│   │   │   ├── Hero.tsx                 ← Hero with video player + ticker pill
+│   │   │   ├── WhyKminds.tsx            ← 4 feature cards
+│   │   │   ├── Testimonials.tsx         ← Scrollable review cards
+│   │   │   ├── Curriculums.tsx          ← AC / VC / IGCSE / IB
+│   │   │   ├── AgeCategories.tsx        ← Years 5–7 / 8–10 / 11–12 paths
+│   │   │   ├── Founder.tsx              ← Founder story + vision/mission/goal
+│   │   │   └── FAQ.tsx                  ← Accordion with 20 questions
 │   │   │
 │   │   └── ui/
-│   │       └── WhatsAppButton.tsx   ← Floating WhatsApp button
+│   │       ├── FAQSchema.tsx            ← JSON-LD schema for Google rich results
+│   │       └── WhatsAppButton.tsx       ← Floating WhatsApp button (bottom-right)
 │   │
 │   └── data/
-│       ├── content.ts               ← ✅ ALL site text lives here
-│       └── courses.ts               ← Course card data
+│       ├── content.ts                   ← ✅ ALL site text lives here
+│       └── courses.ts                   ← Course card data
 │
-├── tailwind.config.ts               ← Design system (colors, fonts, spacing)
-├── next.config.js                   ← Image domains, Next.js config
-└── .gitignore                       ← node_modules, .next excluded
+├── tailwind.config.ts                   ← Full design system (colors, fonts, spacing)
+├── next.config.js                       ← Image domains (Cloudinary, Google CDN)
+├── postcss.config.js
+├── tsconfig.json
+└── .gitignore                           ← node_modules + .next excluded
 ```
 
 ---
 
 ## How to Edit Content
 
-### Change any text on the site
+### ✅ Change any text, links, or copy
 
-Open `src/data/content.ts` — all text, links, and copy is here.
-You never need to touch component files just to update words.
+Open `src/data/content.ts` — everything is here:
 
-### Change course cards
+- Nav links and dropdowns
+- Hero tagline, CTAs, badges
+- Testimonials (name, quote, role, stars)
+- Curriculum cards (AC, VC, IGCSE, IB)
+- Age category cards
+- Why KMinds features
+- Founder section (name, story, vision, mission, goal, stats)
+- All 20 FAQ questions and answers
+- Footer links
+- Contact info (email, phone, WhatsApp, Instagram)
 
-Open `src/data/courses.ts` — add, edit, or remove course objects here.
+### ✅ Change course cards
 
-### Change colors or fonts
+Open `src/data/courses.ts` — add, edit, or remove course objects.
 
-Open `tailwind.config.ts` — the full design system is defined here.
+### ✅ Change brand colors or fonts
+
+Open `tailwind.config.ts` — the full design token system is defined here.
 
 ---
 
-## How to Add a New Page
+## Adding a New Page
 
-1. Create a folder: `src/app/about/`
-2. Create a file: `src/app/about/page.tsx`
-3. It's automatically live at `kminds.vercel.app/about`
+1. Create folder: `src/app/about/`
+2. Create file: `src/app/about/page.tsx`
+3. Automatically live at `kminds.vercel.app/about`
 
 ```tsx
 // src/app/about/page.tsx
@@ -113,53 +154,79 @@ export default function AboutPage() {
 }
 ```
 
+Also add it to `sitemap.ts` so Google indexes it.
+
 ---
 
 ## Form Submissions (Formspree)
 
-The Begin a Session form uses **Formspree** to send emails.
+The `/begin-session` form sends to email via Formspree.
 
-Setup (one time):
+To update the email receiving submissions:
 
-1. Sign up at [formspree.io](https://formspree.io)
-2. Create a new form → copy your form ID
-3. Open `src/app/begin-session/page.tsx`
-4. Replace `"YOUR_FORMSPREE_ID"` with your actual ID
+1. Log in at [formspree.io](https://formspree.io)
+2. Open your KMinds form → **Settings → Email Notifications**
+3. Update the email there — no code changes needed
 
-Free plan = 50 submissions/month.
+To change the Form ID (if you recreate the form):
+
+- Open `src/app/begin-session/page.tsx`
+- Find: `const FORMSPREE_ID = "xxxxxxxx"`
+- Replace with your new ID
 
 ---
 
-## Replacing the Founder Photo
+## Media (Cloudinary)
 
-1. Rename your photo to `founder.jpg`
-2. Drop it into the `public/` folder
-3. It automatically shows — no code changes needed
+Images and videos are hosted on Cloudinary.
+
+**To replace the founder photo:**
+
+- Upload new photo to Cloudinary → copy URL
+- Open `src/data/content.ts` → update `founder.imageSrc`
+
+**To replace the hero video:**
+
+- Upload video to Cloudinary → copy `.mp4` URL
+- Open `src/data/content.ts` → update `heroVideoSrc`
+
+Cloudinary is whitelisted in `next.config.js` under `remotePatterns`.
 
 ---
 
 ## WhatsApp Number
 
 Open `src/data/content.ts` → find `contactInfo.whatsapp`
-Format: country code + number, no spaces or + (e.g. `"916268300535"`)
+
+Format: country code + number, no spaces or `+`
+
+```ts
+whatsapp: "916267000755"; // +91 6267 000 755
+```
 
 ---
 
-## Tech Stack
+## SEO
 
-| Tool             | Purpose                         |
-| ---------------- | ------------------------------- |
-| Next.js 16       | React framework                 |
-| TypeScript       | Type safety                     |
-| Tailwind CSS     | Styling                         |
-| Vercel           | Free hosting + auto-deploy      |
-| Formspree        | Form submissions to email       |
-| Google Fonts     | Plus Jakarta Sans + Nunito Sans |
-| Material Symbols | Icons                           |
+| File                              | Purpose                                                   |
+| --------------------------------- | --------------------------------------------------------- |
+| `src/app/sitemap.ts`              | Auto-generates sitemap.xml — update when adding new pages |
+| `src/app/robots.ts`               | robots.txt — update domain when going live                |
+| `src/app/layout.tsx`              | Global `<title>` and `<meta description>`                 |
+| `src/components/ui/FAQSchema.tsx` | FAQ rich results schema for Google                        |
+
+**To verify rich results:** [search.google.com/test/rich-results](https://search.google.com/test/rich-results)
+
+---
+
+## Environment
+
+No environment variables needed. Formspree ID is stored directly in the begin-session page component.
 
 ---
 
 ## Contact
 
-Email: kaleidoscopicminds.kl@gmail.com  
-WhatsApp: +91 6268 300 535
+- 📧 kaleidoscopicminds.kl@gmail.com
+- 📱 +91 6267 000 755
+- 📸 [@kaleidoscopic*minds*](https://www.instagram.com/kaleidoscopic_minds_/)
