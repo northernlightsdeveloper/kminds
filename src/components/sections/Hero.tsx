@@ -9,12 +9,24 @@ export default function Hero() {
   const [activeTab, setActiveTab] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [fontLoaded, setFontLoaded] = useState(false);
 
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const videos = hero.heroVideos ?? [
     { src: hero.heroVideoSrc, label: hero.videoLabel, icon: "videocam" },
   ];
+
+  // ── ICON FLASH FIX ────────────────────────────────────────
+  // Wait for Material Symbols font to load before showing icons.
+  // This prevents the ugly "arrow_forward" text flash on mobile.
+  useEffect(() => {
+    if (document.fonts) {
+      document.fonts.ready.then(() => setFontLoaded(true));
+    } else {
+      setFontLoaded(true); // fallback for older browsers
+    }
+  }, []);
 
   useEffect(() => {
     videos.forEach((_, i) => {
@@ -40,10 +52,8 @@ export default function Hero() {
   };
 
   const toggleExpand = () => setIsExpanded((prev) => !prev);
-
   const activeVideo = videos[activeTab];
 
-  // Animated pill messages — cycles through these instead of just showing brand name
   const pillMessages = [
     "Now Enrolling for 2026-27",
     "Free Consultation Available",
@@ -58,25 +68,19 @@ export default function Hero() {
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-secondary-container/20 translate-y-1/2 -translate-x-1/4 blur-3xl pointer-events-none" />
       <div className="absolute inset-0 dot-grid opacity-40 pointer-events-none" />
 
-      <div className="relative px-4 md:px-margin-desktop pt-20 pb-24 max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        {/* ── LEFT ──────────────────────────────────────────── */}
+      {/* FIX 1: pt-8 on mobile (was pt-20), gap-8 on mobile (was gap-16) */}
+      <div className="relative px-4 md:px-margin-desktop pt-8 md:pt-20 pb-12 md:pb-24 max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
+        {/* LEFT */}
         <div className="animate-fade-up">
-          {/* ── ANIMATED TICKER PILL ──────────────────────────
-              Scrolls through key facts instead of repeating the brand name.
-              Pure CSS animation — no JS needed.
-              To change messages: edit the pillMessages array above.
-          ─────────────────────────────────────────────────── */}
-          <div className="inline-flex items-center gap-2 bg-primary-fixed border border-primary/20 px-4 py-2 rounded-full mb-8 shadow-sm overflow-hidden max-w-[320px]">
+          {/* FIX 2: Ticker pill — text-[11px] on mobile so it never wraps to 2 lines */}
+          <div className="inline-flex items-center gap-2 bg-primary-fixed border border-primary/20 px-3 py-1.5 rounded-full mb-5 md:mb-8 shadow-sm overflow-hidden max-w-[260px] md:max-w-[320px]">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse shrink-0" />
-            {/* Outer clip window */}
             <div className="overflow-hidden h-5 flex-1">
-              {/* Inner scroll track — animates upward continuously */}
               <div className="animate-ticker">
-                {/* Duplicate messages so the loop is seamless */}
                 {[...pillMessages, ...pillMessages].map((msg, i) => (
                   <div
                     key={i}
-                    className="h-5 flex items-center font-headline text-label-md text-primary font-bold tracking-wide whitespace-nowrap"
+                    className="h-5 flex items-center font-headline text-[10px] md:text-label-md text-primary font-bold tracking-wide whitespace-nowrap"
                   >
                     {msg}
                   </div>
@@ -85,13 +89,13 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Headline — clamp reduced from 2rem–3.5rem to 1.6rem–2.8rem */}
           <h1
             className="font-headline font-extrabold text-on-surface mb-5 leading-[1.1]"
             style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
           >
             {hero.tagline}
           </h1>
+
           <div className="flex items-center gap-3 mb-3">
             <div className="h-px flex-1 bg-gradient-to-r from-primary/30 to-transparent" />
             <p className="font-headline text-label-md text-primary uppercase tracking-widest">
@@ -99,28 +103,35 @@ export default function Hero() {
             </p>
             <div className="h-px flex-1 bg-gradient-to-l from-secondary/30 to-transparent" />
           </div>
+
           <p className="font-body text-body-lg text-on-surface-variant mb-10 max-w-lg leading-relaxed">
             <em className="not-italic font-body text-body-lg text-on-surface-variant">
               {hero.body}
             </em>
           </p>
-          <div className="flex flex-wrap gap-4">
+
+          {/* FIX 3: Buttons — inline-flex + w-fit on mobile so they don't stretch */}
+          <div className="flex flex-col xs:flex-row flex-wrap gap-3 md:gap-4 items-start">
             <Link
               href={hero.primaryCta.href}
-              className="group bg-primary text-on-primary px-8 py-4 rounded-full font-headline text-body-md border-b-4 border-[#3435b0] btn-3d flex items-center gap-2"
+              className="group bg-primary text-on-primary px-7 py-3.5 md:px-8 md:py-4 rounded-full font-headline text-body-md border-b-4 border-[#3435b0] btn-3d inline-flex items-center gap-2 w-fit"
             >
               {hero.primaryCta.label}
-              <span className="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">
-                arrow_forward
-              </span>
+              {/* FIX 4: Icon only shown once font is confirmed loaded */}
+              {fontLoaded && (
+                <span className="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">
+                  arrow_forward
+                </span>
+              )}
             </Link>
             <Link
               href={hero.secondaryCta.href}
-              className="bg-white text-on-surface px-8 py-4 rounded-full font-headline text-body-md border border-outline-variant hover:border-primary hover:text-primary transition-colors shadow-sm"
+              className="bg-white text-on-surface px-7 py-3.5 md:px-8 md:py-4 rounded-full font-headline text-body-md border border-outline-variant hover:border-primary hover:text-primary transition-colors shadow-sm w-fit"
             >
               {hero.secondaryCta.label}
             </Link>
           </div>
+
           <div className="mt-10 flex items-center gap-6 flex-wrap">
             {[
               { icon: "verified", label: "Curriculum Aligned" },
@@ -131,18 +142,19 @@ export default function Hero() {
                 key={b.label}
                 className="flex items-center gap-2 text-on-surface-variant"
               >
-                <span className="material-symbols-outlined text-tertiary text-base">
-                  {b.icon}
-                </span>
+                {fontLoaded && (
+                  <span className="material-symbols-outlined text-tertiary text-base">
+                    {b.icon}
+                  </span>
+                )}
                 <span className="font-headline text-label-md">{b.label}</span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* ── RIGHT: Video Card ────────────────────────────── */}
+        {/* RIGHT: Video Card */}
         <div className="relative animate-scale-in delay-200">
-          {/* Stat card 1 — 95% */}
           <div className="group absolute -left-6 top-8 z-10 bg-white border border-outline-variant/20 shadow-xl rounded-2xl flex items-center overflow-hidden animate-fade-up delay-300 transition-[width,padding] duration-300 ease-out w-[52px] hover:w-[196px] p-[6px] hover:px-4 hover:py-3">
             <div className="w-10 h-10 bg-tertiary-fixed rounded-xl flex items-center justify-center flex-shrink-0">
               <span className="material-symbols-outlined text-tertiary text-xl">
@@ -159,7 +171,6 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Stat card 2 — 4 Curriculums */}
           <div className="group absolute -right-4 bottom-16 z-10 bg-white border border-outline-variant/20 shadow-xl rounded-2xl flex items-center overflow-hidden animate-fade-up delay-400 transition-[width,padding] duration-300 ease-out w-[52px] hover:w-[172px] p-[6px] hover:px-4 hover:py-3">
             <div className="w-10 h-10 bg-secondary-fixed rounded-xl flex items-center justify-center flex-shrink-0">
               <span className="material-symbols-outlined text-secondary text-xl">
@@ -176,7 +187,6 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* ── VIDEO CARD ── */}
           <div className="relative aspect-[4/3] rounded-[40px] overflow-hidden card-shadow border-4 border-white bg-black">
             {videos.map((v, i) => (
               <video
@@ -256,7 +266,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ── LIGHTBOX ── */}
+      {/* Lightbox */}
       {isExpanded && (
         <div
           className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 md:p-10"
