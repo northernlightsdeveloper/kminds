@@ -8,6 +8,7 @@ import Curriculums from "@/components/sections/Curriculums";
 import AgeCategories from "@/components/sections/AgeCategories";
 import Founder from "@/components/sections/Founder";
 import FAQ from "@/components/sections/FAQ";
+import FAQSchema from "@/components/ui/FAQSchema";
 
 import type { Metadata } from "next";
 
@@ -32,6 +33,9 @@ export default function HomePage() {
           }),
         }}
       />
+      {/* Structured data for Google rich results — invisible to users */}
+      <FAQSchema />
+
       <Hero />
       <WhyKminds />
       <Testimonials />
