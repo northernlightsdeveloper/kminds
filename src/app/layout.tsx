@@ -15,6 +15,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import PageLoader from "@/components/ui/PageLoader";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
@@ -112,6 +113,12 @@ export default function RootLayout({
       </head>
 
       <body>
+        {/* Splash loader — hides the page until the icon font has loaded */}
+        <PageLoader />
+        {/* If JavaScript is off, don't leave visitors stuck on the loader */}
+        <noscript>
+          <style>{`#page-loader{display:none !important}`}</style>
+        </noscript>
         <Navbar />
         <main>{children}</main>
         <Footer />

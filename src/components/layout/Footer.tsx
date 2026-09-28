@@ -35,7 +35,7 @@ export default function Footer() {
             </Link>
             <p className="text-inverse-on-surface/50 font-body text-body-md leading-relaxed mb-6">
               Where Potential Becomes Performance. Structured, personalised
-              learning for Australian students.
+              learning for every student.
             </p>
             <a
               href={`https://wa.me/${contactInfo.whatsapp}`}
