@@ -1,12 +1,14 @@
 // src/components/ui/LeadPopup.tsx
 // ─────────────────────────────────────────────────────────────
-// LEAD POPUP — a "must fill" contact form for marketing.
+// LEAD POPUP — a contact form shown to visitors for marketing.
 //
 // Behaviour:
 //   • Appears ~10 seconds after the visitor lands, OR as soon as
 //     they scroll about one screen down — whichever is first.
-//   • Cannot be closed (no X, no Esc, no click-outside).
-//   • Once submitted it's remembered in the browser, so returning
+//   • Can be closed (X button, Esc, or clicking outside). Closing
+//     it snoozes it for DISMISS_DAYS days on that browser, so
+//     visitors aren't nagged every single visit.
+//   • Once submitted it's remembered permanently, so returning
 //     visitors are never asked again.
 //   • Never shown on the form / policy pages (so people can read
 //     the Privacy Policy before consenting).
@@ -31,7 +33,8 @@ const SHEETS_URL =
 // Same Formspree form used by /begin-session (fallback only)
 const FORMSPREE_URL = "https://formspree.io/f/mbdbqvzb";
 
-const STORAGE_KEY = "km_lead_v1";
+const STORAGE_KEY = "km_lead_v2";
+const DISMISS_DAYS = 3; // closing (without submitting) hides it for this many days
 const DELAY_MS = 10_000; // show after 10 seconds…
 const SCROLL_TRIGGER = 0.8; // …or after scrolling ~1 screen (0.8 × screen height)
 const SUCCESS_MS = 900; // how long the "thank you" stays up
@@ -51,16 +54,35 @@ type Errors = {
   consent?: string;
 };
 
-const isDone = () => {
+type Stored = { status: "submitted" } | { status: "dismissed"; at: number };
+
+const readStored = (): Stored | null => {
   try {
-    return localStorage.getItem(STORAGE_KEY) === "1";
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as Stored) : null;
   } catch {
-    return false;
+    return null;
   }
 };
-const markDone = () => {
+const shouldSkip = () => {
+  const stored = readStored();
+  if (!stored) return false;
+  if (stored.status === "submitted") return true;
+  return Date.now() - stored.at < DISMISS_DAYS * 24 * 60 * 60 * 1000;
+};
+const markSubmitted = () => {
   try {
-    localStorage.setItem(STORAGE_KEY, "1");
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ status: "submitted" }));
+  } catch {
+    /* private mode — popup will simply show again next visit */
+  }
+};
+const markDismissed = () => {
+  try {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ status: "dismissed", at: Date.now() }),
+    );
   } catch {
     /* private mode — popup will simply show again next visit */
   }
@@ -82,17 +104,17 @@ export default function LeadPopup() {
 
   // ── When to show it ─────────────────────────────────────────
   useEffect(() => {
-    if (pathname === "/thank-you") markDone(); // finished the main form
+    if (pathname === "/thank-you") markSubmitted(); // finished the main form
     if (NEVER_SHOW_ON.includes(pathname)) {
       setPhase((p) => (p === "open" ? "closed" : p));
       return;
     }
-    if (isDone()) return;
+    if (shouldSkip()) return;
 
     let timer: ReturnType<typeof setTimeout>;
     let retry: ReturnType<typeof setTimeout>;
     const show = () => {
-      if (isDone()) return;
+      if (shouldSkip()) return;
       // page loader still up → try again in a moment (don't lose the trigger)
       if (document.getElementById("page-loader")) {
         clearTimeout(retry);
@@ -117,6 +139,12 @@ export default function LeadPopup() {
     return cleanup;
   }, [pathname]);
 
+  const dismiss = useCallback(() => {
+    if (phase !== "open") return; // don't let Esc cut off the "thank you" message
+    markDismissed();
+    setPhase("closed");
+  }, [phase]);
+
   // ── Lock page scroll + keep keyboard focus inside the popup ──
   useEffect(() => {
     if (phase === "closed") return;
@@ -125,6 +153,10 @@ export default function LeadPopup() {
     dialogRef.current?.focus({ preventScroll: true });
 
     const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        dismiss();
+        return;
+      }
       if (e.key !== "Tab" || !dialogRef.current) return;
       const items = dialogRef.current.querySelectorAll<HTMLElement>(
         'input:not([tabindex="-1"]), button:not([disabled]), a[href]',
@@ -146,7 +178,7 @@ export default function LeadPopup() {
       document.body.style.overflow = prev;
       document.removeEventListener("keydown", onKey);
     };
-  }, [phase]);
+  }, [phase, dismiss]);
 
   // ── Close automatically after the thank-you message ─────────
   useEffect(() => {
@@ -217,7 +249,7 @@ export default function LeadPopup() {
 
     // Bot filled the hidden field → pretend it worked, send nothing
     if (trap) {
-      markDone();
+      markSubmitted();
       setPhase("success");
       return;
     }
@@ -227,7 +259,7 @@ export default function LeadPopup() {
     try {
       const ok = await send();
       if (!ok) throw new Error("send failed");
-      markDone();
+      markSubmitted();
       try {
         sendGAEvent("event", "generate_lead", {
           method: "popup",
@@ -257,6 +289,9 @@ export default function LeadPopup() {
     <div
       className="fixed inset-0 z-[9000] flex items-start justify-center overflow-y-auto p-4 bg-on-surface/60 backdrop-blur-sm"
       style={{ animation: "kmLeadFade 0.3s ease-out" }}
+      onMouseDown={(e) => {
+        if (e.target === e.currentTarget) dismiss();
+      }}
     >
       <div
         ref={dialogRef}
@@ -268,6 +303,17 @@ export default function LeadPopup() {
         style={{ animation: "kmLeadUp 0.4s ease-out" }}
       >
         <div className="h-1.5 w-full bg-gradient-to-r from-primary via-secondary-container to-tertiary-container" />
+
+        {phase === "open" && (
+          <button
+            type="button"
+            onClick={dismiss}
+            aria-label="Close"
+            className="absolute right-4 top-5 z-10 flex h-9 w-9 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container-low hover:text-on-surface"
+          >
+            <span className="material-symbols-outlined text-2xl">close</span>
+          </button>
+        )}
 
         {phase === "success" ? (
           <div className="px-8 py-14 text-center">

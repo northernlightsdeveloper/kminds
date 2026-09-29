@@ -22,11 +22,33 @@ import { useEffect, useState } from "react";
 const MIN_VISIBLE_MS = 500; // shortest time the loader stays up
 const MAX_WAIT_MS = 3500; // safety net — always reveal the site by then
 const FADE_MS = 400; // fade-out duration
+const QUOTE_MS = 1400; // how long each quote is shown before the next fades in
+
+// On-brand, upbeat lines shown one at a time while the site loads.
+// Colour cycles through the theme (primary → secondary → tertiary).
+const QUOTES = [
+  { text: "Where potential becomes performance", color: "text-primary" },
+  { text: "Sharpening minds, one session at a time", color: "text-secondary" },
+  { text: "Clarity. Confidence. Academic excellence.", color: "text-tertiary" },
+  { text: "Structured learning, real results", color: "text-primary" },
+  { text: "Building strong fundamentals that last", color: "text-secondary" },
+];
 
 type Phase = "visible" | "fading" | "gone";
 
 export default function PageLoader() {
   const [phase, setPhase] = useState<Phase>("visible");
+  const [quoteIndex, setQuoteIndex] = useState(0);
+
+  // Cycle the quote underneath the logo for as long as the loader is up
+  useEffect(() => {
+    if (phase !== "visible") return;
+    const t = setInterval(
+      () => setQuoteIndex((i) => (i + 1) % QUOTES.length),
+      QUOTE_MS,
+    );
+    return () => clearInterval(t);
+  }, [phase]);
 
   useEffect(() => {
     let cancelled = false;
@@ -85,21 +107,42 @@ export default function PageLoader() {
         alt="Kaleidoscopic Minds"
         className="h-20 w-auto motion-safe:animate-pulse"
       />
-      <div className="h-1 w-40 overflow-hidden rounded-full bg-primary-fixed">
-        <div
-          className="h-full w-1/2 rounded-full bg-gradient-to-r from-primary via-secondary-container to-tertiary-container"
-          style={{ animation: "kmLoaderSlide 1.1s ease-in-out infinite" }}
-        />
+
+      <div
+        className="h-14 px-8 flex items-center justify-center"
+        aria-hidden="true"
+      >
+        <p
+          key={quoteIndex}
+          className={`font-headline font-semibold text-center text-base sm:text-lg max-w-xs sm:max-w-sm ${QUOTES[quoteIndex].color}`}
+          style={{ animation: "kmLoaderQuote 1.4s ease-in-out" }}
+        >
+          {QUOTES[quoteIndex].text}
+        </p>
       </div>
+
+      <div className="flex gap-1.5" aria-hidden="true">
+        {QUOTES.map((_, i) => (
+          <span
+            key={i}
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              i === quoteIndex ? "w-5 bg-primary" : "w-1.5 bg-primary-fixed"
+            }`}
+          />
+        ))}
+      </div>
+
       <style>{`
         /* Failsafe: even if JavaScript never runs, hide the loader after 5s */
         @keyframes kmLoaderFailsafe {
           to { opacity: 0; visibility: hidden; pointer-events: none; }
         }
         #page-loader { animation: kmLoaderFailsafe 0.4s ease-out 5s forwards; }
-        @keyframes kmLoaderSlide {
-          0%   { transform: translateX(-100%); }
-          100% { transform: translateX(200%); }
+        @keyframes kmLoaderQuote {
+          0%   { opacity: 0; transform: translateY(6px); }
+          15%  { opacity: 1; transform: translateY(0); }
+          85%  { opacity: 1; transform: translateY(0); }
+          100% { opacity: 0; transform: translateY(-6px); }
         }
       `}</style>
     </div>
