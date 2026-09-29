@@ -12,12 +12,14 @@ export default function PrivacyPolicy() {
       content: (
         <>
           <p>
-            We collect information you provide directly when you fill out forms,
-            book a session, or contact us. This may include:
+            We collect information you provide directly when you fill out forms
+            (including the contact form shown when you visit our website), book
+            a session, or contact us. This may include:
           </p>
           <ul>
             <li>Full name and email address</li>
-            <li>Phone number</li>
+            <li>Phone or WhatsApp number</li>
+            <li>Whether you are a parent or a student</li>
             <li>Child&apos;s year level and curriculum</li>
             <li>Any additional information you choose to share</li>
           </ul>
@@ -42,6 +44,11 @@ export default function PrivacyPolicy() {
             <li>Schedule and deliver tutoring sessions</li>
             <li>Communicate with you about your child&apos;s progress</li>
             <li>Send session reminders and program updates</li>
+            <li>
+              Contact you by WhatsApp, phone, or email about our tutoring
+              programs, only where you have agreed to be contacted (you can
+              opt out at any time)
+            </li>
             <li>Improve the quality of our services</li>
             <li>Respond to enquiries and support requests</li>
           </ul>
@@ -231,7 +238,7 @@ export default function PrivacyPolicy() {
           </p>
           <p className="font-body text-body-md text-on-surface-variant mt-4">
             <span className="font-semibold text-on-surface">Last updated:</span>{" "}
-            May 2026
+            September 2026
           </p>
         </div>
       </section>

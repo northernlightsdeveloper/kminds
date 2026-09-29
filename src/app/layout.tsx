@@ -16,6 +16,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import PageLoader from "@/components/ui/PageLoader";
+import LeadPopup from "@/components/ui/LeadPopup";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
@@ -124,6 +125,8 @@ export default function RootLayout({
         <Footer />
         {/* Floating WhatsApp button — appears on every page */}
         <WhatsAppButton />
+        {/* Must-fill contact popup for marketing — see LeadPopup.tsx */}
+        <LeadPopup />
         <GoogleAnalytics gaId="G-Z9G18XWYF0" />
       </body>
     </html>

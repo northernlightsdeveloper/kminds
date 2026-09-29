@@ -12,7 +12,8 @@
 //   2. Once the page + icon font have loaded, it fades out.
 //   3. It always stays for at least MIN_VISIBLE_MS so it never
 //      just flickers, and gives up after MAX_WAIT_MS so a slow
-//      network can never trap the visitor behind it.
+//      network can never trap the visitor behind it. A CSS-only
+//      failsafe also hides it after 5s even if JavaScript fails.
 // ─────────────────────────────────────────────────────────────
 "use client";
 
@@ -91,6 +92,11 @@ export default function PageLoader() {
         />
       </div>
       <style>{`
+        /* Failsafe: even if JavaScript never runs, hide the loader after 5s */
+        @keyframes kmLoaderFailsafe {
+          to { opacity: 0; visibility: hidden; pointer-events: none; }
+        }
+        #page-loader { animation: kmLoaderFailsafe 0.4s ease-out 5s forwards; }
         @keyframes kmLoaderSlide {
           0%   { transform: translateX(-100%); }
           100% { transform: translateX(200%); }
