@@ -23,9 +23,9 @@ export const metadata: Metadata = {
   // ── SEO ───────────────────────────────────────────────────
   title: "Kaleidoscopic Minds | Personalised Online Tutoring Years 5–12",
   description:
-    "1-on-1 personalised online tutoring for Australian students in Years 5–12. Aligned with AC, VC, IGCSE and IB curriculums. Maths & Science. Real results.",
+    "1-on-1 personalised online tutoring for students in Years 5–12, anywhere in the world. Aligned with AC, VC, IGCSE and IB curriculums. Maths & Science. Real results.",
   keywords:
-    "Kaleidoscopic Minds, KMinds, online tutoring Australia, year 10 tutor, maths tutor, science tutor, IGCSE tutor, IB tutor, Victorian curriculum tutor, Australian curriculum tutor",
+    "Kaleidoscopic Minds, KMinds, online tutoring, year 10 tutor, maths tutor, science tutor, IGCSE tutor, IB tutor, Victorian curriculum tutor, Australian curriculum tutor",
 
   // ── Canonical URL ─────────────────────────────────────────
   metadataBase: new URL("https://www.k-minds.com"),
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Kaleidoscopic Minds | Personalised Online Tutoring",
     description:
-      "Where Potential Becomes Performance. 1-on-1 curriculum-aligned tutoring for Australian students Years 5–12.",
+      "Where Potential Becomes Performance. 1-on-1 curriculum-aligned tutoring for every student, Years 5–12.",
     url: "https://www.k-minds.com",
     siteName: "Kaleidoscopic Minds",
     locale: "en_AU",
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kaleidoscopic Minds | Online Tutoring",
     description:
-      "Personalised 1-on-1 tutoring for Australian students. Years 5–12. AC, VC, IGCSE & IB.",
+      "Personalised 1-on-1 tutoring for every student. Years 5–12. AC, VC, IGCSE & IB.",
     images: ["/og-default.jpg"],
   },
 

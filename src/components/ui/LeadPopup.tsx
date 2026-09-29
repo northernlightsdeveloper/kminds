@@ -34,7 +34,7 @@ const FORMSPREE_URL = "https://formspree.io/f/mbdbqvzb";
 const STORAGE_KEY = "km_lead_v1";
 const DELAY_MS = 10_000; // show after 10 seconds…
 const SCROLL_TRIGGER = 0.8; // …or after scrolling ~1 screen (0.8 × screen height)
-const SUCCESS_MS = 2200; // how long the "thank you" stays up
+const SUCCESS_MS = 900; // how long the "thank you" stays up
 const NEVER_SHOW_ON = [
   "/begin-session",
   "/thank-you",
